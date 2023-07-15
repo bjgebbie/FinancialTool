@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import '../models/DCF';
 import DCF from '../models/DCF';
-//65824
-//12734
-//67155
+//65824 ocf
+//12734 mce
+//67155 csms
+//22001 tso
 export default class TenK extends Component{
     
     constructor(props) {
@@ -15,7 +16,8 @@ export default class TenK extends Component{
             p2fcf: '',
             growthRate: '',
             n: '',
-            csms: ''
+            csms: '',
+            tso: '1',
         };
     
         this.handleOcfChange = this.handleOcfChange.bind(this);
@@ -25,6 +27,7 @@ export default class TenK extends Component{
         this.handleGrowthRateChange = this.handleGrowthRateChange.bind(this);
         this.handleNChange = this.handleNChange.bind(this);
         this.handleCsmsChange = this.handleCsmsChange.bind(this);
+        this.handleTSOChange = this.handleTSOChange.bind(this);
       }
     
       handleOcfChange(event) {
@@ -83,18 +86,27 @@ export default class TenK extends Component{
         );
       }
 
+      handleTSOChange(event) {
+        this.setState(
+            {
+                tso: event.target.value,
+            }
+        );
+      }
+
       render() {
         return (
             <div>
                 <form>
-                    <div className="form-group" style={{textAlign: "center"}}>
+                    <div className="form-group" >
                         <p>Operating Cash Flow: <input type="text" value={this.state.ocf} onChange={this.handleOcfChange} /></p>
                         <p>Discount Rate: <input type="text" value={this.state.dr} onChange={this.handleDrChange} /></p>
                         <p>Maintenance Capital Expenditure: <input type="text" value={this.state.mce} onChange={this.handleMceChange} /></p>
                         <p>Price to FCF: <input type="text" value={this.state.p2fcf} onChange={this.handleP2fcfChange} /></p>
                         <p>Growth Rate: <input type="text" value={this.state.growthRate} onChange={this.handleGrowthRateChange} /></p>
                         <p>How many years: <input type="text" value={this.state.n} onChange={this.handleNChange} /></p>
-                        <p>Cash and short-term: <input type="text" value={this.state.csms} onChange={this.handleCsmsChange} /></p>                
+                        <p>Cash and short-term: <input type="text" value={this.state.csms} onChange={this.handleCsmsChange} /></p>
+                        <p>Total Shares Outstanding <input type="text" value={this.state.tso} onChange={this.handleTSOChange} /></p>                
                     </div>
                     <div>
                         {new DCF(
@@ -104,7 +116,8 @@ export default class TenK extends Component{
                                 Number(this.state.p2fcf),
                                 Number(this.state.growthRate),
                                 Number(this.state.csms),
-                                Number(this.state.n)).calculate().toString()}
+                                Number(this.state.n),
+                                Number(this.state.tso)).calculate().toString()}
                     </div>
                 </form>
             </div>

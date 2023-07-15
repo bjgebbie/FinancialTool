@@ -7,6 +7,7 @@ export default class DCF {
      * mce: maintenance capital expenditure (AKA properties, plant and equipment)
      * n: how many years we are we are discounting into the future
      * csms: cash and short-term marketable securities
+     * tso: total shares outstanding
      * 
      * Model:
      *  1. Calculate Free Cash Flow (fcf) which is ocf - mce
@@ -16,7 +17,7 @@ export default class DCF {
      *  5. Add csms to dcf
      *  6. dcf / total shares outstanding yields fair price
      */
-    constructor(ocf, mce, dr, p2fcf, growthRate, csms, n) {
+    constructor(ocf, mce, dr, p2fcf, growthRate, csms, n, tso) {
         this.ocf = ocf;
         this.mce = mce;
         this.dr = dr;
@@ -24,6 +25,7 @@ export default class DCF {
         this.growthRate = growthRate;
         this.csms = csms;
         this.n = n;
+        this.tso = tso;
     }
 
     calculate() {
@@ -43,7 +45,7 @@ export default class DCF {
         termVal = fcf * this.p2fcf;
         discTermVal = termVal / Math.pow(1 + this.dr, this.n)
 
-        return sumOfDcf + discTermVal + this.csms;
+        return (sumOfDcf + discTermVal + this.csms) / this.tso;
     }
     
 }
