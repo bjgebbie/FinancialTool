@@ -17,14 +17,12 @@ export default class Units extends Component{
     this.setState({open: open});
   }
   getCashFlow = async () => {
-    const url = 'http://127.0.0.1:5000/CashFlow';
+    const url = 'http://127.0.0.1:5000/Dcf?symbol=CVS';
     let response = await axios({
       method: 'get',
       url: url,
-      data: {
-      }
     });
-    console.log(response.data);
+    console.log(JSON.parse(response.data));
     return response.data;
   }
 
