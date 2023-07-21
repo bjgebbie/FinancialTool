@@ -1,14 +1,12 @@
 import React from 'react'
 import './App.css';
-import TenK from './components/TenK';
 import DcfInput from './components/DcfInput'
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   
   return (
     <div className="Info" style={{textAlign: "center"}}>
-      <TenK /> 
       <DcfInput />
     </div>
   );
