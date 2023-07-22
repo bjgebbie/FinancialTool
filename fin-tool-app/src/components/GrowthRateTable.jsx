@@ -4,12 +4,11 @@ import getGrowthRate from "../myFinanceAPI/getGrowthRate";
 
 
 function GrowthRateTable(props) {
-    const {symbol} = props;
+    const {symbol, flag, setFlag} = props;
     const [revenueGR, setRevenueGR] = useState('0.00');
     const [epsDGR, setEpsD] = useState('0.00');
     const [equityGR, setequityGR] = useState('0.00');
     const [fcfGR, setFcfGrowthRate] = useState('0.00');
-    const [flag, setFlag] = useState(true);
 
     if (flag){
         getGrowthRate(symbol, 'Revenue').then(
@@ -32,7 +31,7 @@ function GrowthRateTable(props) {
                 setFcfGrowthRate(response)
             }
         )
-        setFlag(false);
+        setFlag(!flag);
     }
     
         

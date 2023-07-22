@@ -6,17 +6,21 @@ function GrowthRateButton(props) {
 
     const {symbol} = props;
     const [clicked, setClicked] = useState(false);
+    const [flag, setFlag] = useState(true);
 
-    function handleChange() {
-        setClicked(true);
+
+    function handleClick() {
+        if(clicked){
+            setFlag(true)
+        }else{
+            setClicked(true);
+        } 
     }
 
     return (
         <div>   
-            {   
-                symbol !== '' && <Button onClick={handleChange} variant="success">Get Growth Rate</Button>     
-            }
-            {clicked && <GrowthRateTable symbol={symbol}/>}
+            {symbol !== '' && <Button onClick={handleClick} variant="success">Get Growth Rate</Button>}
+            {clicked && <GrowthRateTable symbol={symbol} flag={flag} setFlag={setFlag}/> }
         </div>
     );
 }
