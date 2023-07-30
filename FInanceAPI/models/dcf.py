@@ -17,10 +17,9 @@
      6. dcf / total shares outstanding yields fair price
 '''
 class DCF:
-    def __init__(self, cash_flow, balance_sheet, dr, growth_rate, n, tso, market_cap):
+    def __init__(self, cash_flow, balance_sheet, dr, growth_rate, n, tso, market_cap, closing_price):
         self.cash_flow = cash_flow[list(cash_flow)[0]]
         self.balance_sheet = balance_sheet[list(balance_sheet)[0]]
-        #print(self.balance_sheet)
         self.ocf = self.cash_flow['Operating Cash Flow']
         self.mce = self.cash_flow['Net PPE Purchase And Sale']
         self.dr = dr
@@ -30,19 +29,19 @@ class DCF:
         self.csms = self.balance_sheet['Cash Cash Equivalents And Short Term Investments']
         self.n = n
         self.tso = tso
+        self.closing_price = closing_price
 
     def calculate(self): 
-        print(self.balance_sheet)
         sumOfDcf = 0
         dcf = 0
         termVal = 0
         discTermVal = 0; 
-        for i in range(self.n):            
+        for i in range(self.n): 
             self.fcf = self.fcf * (self.growth_rate + 1)
             dcf = self.fcf / ((1 + self.dr) ** (i + 1))
             sumOfDcf = dcf + sumOfDcf
         termVal = self.fcf * self.p2fcf
         discTermVal = termVal / ((1 + self.dr) ** self.n)
-        
-        value = (sumOfDcf + discTermVal + self.csms - self.balance_sheet['Net Debt']) / self.tso
-        return str(round(value, 3))
+        value = (sumOfDcf + discTermVal + self.csms) / self.tso
+
+        return [str(round(self.closing_price,3 )), str(round(value, 3))]

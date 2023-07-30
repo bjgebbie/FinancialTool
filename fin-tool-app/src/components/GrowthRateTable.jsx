@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Table from 'react-bootstrap/Table'
 import getGrowthRate from "../myFinanceAPI/getGrowthRate";
 
 
 function GrowthRateTable(props) {
-    const {symbol, flag, setFlag} = props;
+    const { symbol } = props;
     const [revenueGR, setRevenueGR] = useState('0.00');
     const [epsDGR, setEpsD] = useState('0.00');
-    const [equityGR, setequityGR] = useState('0.00');
+    const [equityGR, setEquityGR] = useState('0.00');
     const [fcfGR, setFcfGrowthRate] = useState('0.00');
 
-    if (flag){
+    useEffect(() => {
+        
         getGrowthRate(symbol, 'Revenue').then(
             (response) => {
                 setRevenueGR(response)
@@ -18,7 +19,7 @@ function GrowthRateTable(props) {
         );
         getGrowthRate(symbol, 'Equity').then(
             (response) => {
-                setequityGR(response)
+                setEquityGR(response)
             }
         );
         getGrowthRate(symbol, 'EPS (Diluted)').then(
@@ -31,10 +32,8 @@ function GrowthRateTable(props) {
                 setFcfGrowthRate(response)
             }
         )
-        setFlag(!flag);
-    }
+    });
     
-        
     return (
         <Table striped bordered hover>
             <thead>

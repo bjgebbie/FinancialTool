@@ -2,6 +2,7 @@ from flask import Flask, request
 import yfinance as yf
 from flask_cors import CORS
 from models.dcf import DCF
+from models.dcfEnterprise import DCFEnterprise
 
 app = Flask(__name__)
 CORS(app)
@@ -18,7 +19,7 @@ def get_dcf():
     n = request.args.get('n')
 
     data = yf.Ticker(symbol)
-    cash_flow = data.cashflow.to_dict()
+    cash_flow = data.cash_flow.to_dict()
     balance_sheet = data.balance_sheet.to_dict()
 
     tso = data.get_shares_full(start='2023-01-01', end=None)
@@ -26,7 +27,40 @@ def get_dcf():
 
     market_cap = data.fast_info.market_cap
 
+    hist = data.history(period="1d")
+    closing_dict = hist.to_dict()['Close']
+    closing_price = next(iter(closing_dict.values()))
+
     return DCF(cash_flow, 
+               balance_sheet, 
+               float(dr), 
+               float(growth_rate), 
+               int(n), 
+               tso, 
+               market_cap,
+               closing_price).calculate()
+
+@app.route('/DcfE')
+def get_dcf_e():
+
+    symbol = request.args.get('symbol')
+    if symbol == '':
+        return ''
+    
+    growth_rate = request.args.get('growthRate')
+    dr = request.args.get('dr')
+    n = request.args.get('n')
+
+    data = yf.Ticker(symbol)
+    cash_flow = data.cash_flow.to_dict()
+    balance_sheet = data.balance_sheet.to_dict()
+
+    tso = data.get_shares_full(start='2023-01-01', end=None)
+    tso = tso[tso.size-1]
+
+    market_cap = data.fast_info.market_cap
+
+    return DCFEnterprise(cash_flow, 
                balance_sheet, 
                float(dr), 
                float(growth_rate), 
@@ -64,6 +98,25 @@ def get_cagr():
 
     return str(round(cagr,4))
 
+@app.route('/StockInfo')
+def get_stock_info():
+    symbol = request.args.get('symbol')
+    data = yf.Ticker(symbol)
+
+    balance_sheet = data.balance_sheet.to_dict()
+    net_debt = balance_sheet[list(balance_sheet)[0]]['Net Debt']
+    shareholder_equity = balance_sheet[list(balance_sheet)[0]]['Stockholders Equity']
+    de_ratio = net_debt / shareholder_equity
+
+    income_stmt = data.income_stmt.to_dict()
+    diluted_eps = income_stmt[list(income_stmt)[0]]['Diluted EPS']
+    eps = income_stmt[list(income_stmt)[0]]['Basic EPS']
+
+    hist = data.history(period="1d")
+    closing_dict = hist.to_dict()['Close']
+    closing_price = next(iter(closing_dict.values()))
+
+    return [round(closing_price, 4), diluted_eps, eps, round(de_ratio, 4)]
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')

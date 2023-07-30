@@ -24,10 +24,11 @@ class DcfTests(unittest.TestCase):
             0.10,           # gr
             10,             # n
             22_001_000_000, # tso
-            608_900_000_000 # market cap
+            608_900_000_000, # market cap
+            123
         ).calculate()
 
-        self.assertEqual('39.848', dcf_results) 
+        self.assertEqual('39.848', dcf_results[1]) 
         
     def test_dcf_e(self):
 
