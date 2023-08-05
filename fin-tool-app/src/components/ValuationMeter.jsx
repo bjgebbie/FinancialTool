@@ -5,6 +5,9 @@ function ValuationMeter(props) {
     if(Number(fairValue) >= Number(currentValue)) {
         const now = 100 * currentValue / fairValue;
         const remain = 100 - now;
+        console.log(`now: ${now}`);
+        console.log(`remain: ${remain}`);
+        
         return (
             <div>
                 <ProgressBar>

@@ -13,14 +13,13 @@ function FairValue(props) {
     const [enterpriseValue, setEnterpriseValue] = useState('0.000');
     const [currentPrice, setCurrentPrice] = useState('0.000');
 
-
     useEffect(() => {
         getDcfFairValue(symbol, growthRate, dr, n).then(
             (response) => {
                 const responseList = response.split(',')
                 setCurrentPrice(responseList[0]);
                 setFairValue(responseList[1]);
-
+                console.log(responseList)
             }
         )
         getDcfEFairValue(symbol, growthRate, dr, n).then(
@@ -30,7 +29,7 @@ function FairValue(props) {
                 setEnterpriseValue(responseList[1])
             }
         )
-    })
+    }, [symbol, growthRate, dr, n])
 
     return (
         <div>

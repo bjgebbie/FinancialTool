@@ -18,18 +18,19 @@ function StockInfo (props) {
     const [deRatio, setDeRatio] = useState('0.000');
 
     useEffect(() => {
-        if (symbol !== '') {
-            getStockInfo(symbol).then(
-                (response) => {
-                    const responseList = response.split(',');
-                    setCurrentPrice(responseList[0]);
-                    setDilutedEps(responseList[1]);
-                    setEps(responseList[2]);
-                    setDeRatio(responseList[3])
-                }
-            );
-        }
-      });
+            if (symbol !== '') {
+                getStockInfo(symbol).then(
+                    (response) => {
+                        const responseList = response.split(',');
+                        setCurrentPrice(responseList[0]);
+                        setDilutedEps(responseList[1]);
+                        setEps(responseList[2]);
+                        setDeRatio(responseList[3])
+                    }
+                );
+            }
+        }, [symbol]
+      );
     
     return(<div>
         <Container>

@@ -12,27 +12,28 @@ function GrowthRateTable(props) {
 
     useEffect(() => {
         
-        getGrowthRate(symbol, 'Revenue').then(
-            (response) => {
-                setRevenueGR(response)
-            }
-        );
-        getGrowthRate(symbol, 'Equity').then(
-            (response) => {
-                setEquityGR(response)
-            }
-        );
-        getGrowthRate(symbol, 'EPS (Diluted)').then(
-            (response) => {
-                setEpsD(response)
-            }
-        );
-        getGrowthRate(symbol, 'FCF').then(
-            (response) => {
-                setFcfGrowthRate(response)
-            }
-        )
-    });
+            getGrowthRate(symbol, 'Revenue').then(
+                (response) => {
+                    setRevenueGR(response)
+                }
+            );
+            getGrowthRate(symbol, 'Equity').then(
+                (response) => {
+                    setEquityGR(response)
+                }
+            );
+            getGrowthRate(symbol, 'EPS (Diluted)').then(
+                (response) => {
+                    setEpsD(response)
+                }
+            );
+            getGrowthRate(symbol, 'FCF').then(
+                (response) => {
+                    setFcfGrowthRate(response)
+                }
+            )
+        }, [symbol]
+    );
     
     return (
         <Table striped bordered hover>

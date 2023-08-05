@@ -10,10 +10,14 @@ import StockInfo from "./StockInfo";
 function Analysis () {
     
     const [symbol, setSymbol] = useState('');
-    const [selectedSymbol, setSelectedSymbol] = useState('0.00');
     const [growthRate, setGrowthRate] = useState('0.10');
     const [dr, setDr] = useState('0.15');
     const [n, setN] = useState('10');
+    const [selectedSymbol, setSelectedSymbol] = useState('0.00');
+    const [selectedGr, setSelectedGr] = useState('0.00');
+    const [selectedDr, setSelectedDr] = useState('0.00');
+    const [selectedN, setSelectedN] = useState('0.00');
+
     const [showDetails, setShowDetails] = useState(false);
 
     function handleSymbolChange (event) {
@@ -30,6 +34,9 @@ function Analysis () {
     }
     function handleBlur(){
         setSelectedSymbol(symbol);
+        setSelectedGr(growthRate);
+        setSelectedDr(dr);
+        setSelectedN(n);
         setShowDetails(true);
     }
 
@@ -52,10 +59,10 @@ function Analysis () {
                         <React.Fragment>
                             {   showDetails &&
                                 <React.Fragment>
-                                    <p>Growth Rate: <input type="text" value={growthRate} onChange={handleGrowthRateChange} /></p>
-                                    <p>Discount Rate: <input type="text" value={dr} onChange={handleDrChange} /></p>
-                                    <p>How many years: <input type="text" value={n} onChange={handleNChange} /></p>
-                                    <FairValue symbol={selectedSymbol} growthRate={growthRate} dr={dr} n={n}/>
+                                    <p>Growth Rate: <input type="text" value={growthRate} onChange={handleGrowthRateChange} onBlur={handleBlur}/></p>
+                                    <p>Discount Rate: <input type="text" value={dr} onChange={handleDrChange} onBlur={handleBlur}/></p>
+                                    <p>How many years: <input type="text" value={n} onChange={handleNChange} onBlur={handleBlur}/></p>
+                                    <FairValue symbol={selectedSymbol} growthRate={selectedGr} dr={selectedDr} n={selectedN}/>
                                 </React.Fragment>
                             }
                         </React.Fragment>
