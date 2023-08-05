@@ -1,3 +1,5 @@
+import numpy as np
+import yfinance as yf
 ''' 
     ocf: operating cash flow 
     dr: discount rate (return you want to achieve)
@@ -21,7 +23,7 @@ class DCF:
         self.cash_flow = cash_flow[list(cash_flow)[0]]
         self.balance_sheet = balance_sheet[list(balance_sheet)[0]]
         self.ocf = self.cash_flow['Operating Cash Flow']
-        self.mce = self.cash_flow['Net PPE Purchase And Sale']
+        self.mce = self.cash_flow['Net PPE Purchase And Sale'] if not np.isnan(self.cash_flow['Net PPE Purchase And Sale']) else 0.0
         self.dr = dr
         self.fcf = self.ocf + self.mce
         self.p2fcf = market_cap / self.fcf
@@ -32,10 +34,11 @@ class DCF:
         self.closing_price = closing_price
 
     def calculate(self): 
-        sumOfDcf = 0
+        sumOfDcf = 0 
         dcf = 0
         termVal = 0
-        discTermVal = 0; 
+        discTermVal = 0
+
         for i in range(self.n): 
             self.fcf = self.fcf * (self.growth_rate + 1)
             dcf = self.fcf / ((1 + self.dr) ** (i + 1))
@@ -45,3 +48,34 @@ class DCF:
         value = (sumOfDcf + discTermVal + self.csms) / self.tso
 
         return [str(round(self.closing_price,3 )), str(round(value, 3))]
+    
+    def get(request):
+        symbol = request.args.get('symbol')
+        if symbol == '':
+            return ''
+        
+        growth_rate = request.args.get('growthRate')
+        dr = request.args.get('dr')
+        n = request.args.get('n')
+
+        data = yf.Ticker(symbol)
+        cash_flow = data.cash_flow.to_dict()
+        balance_sheet = data.balance_sheet.to_dict()
+
+        tso = data.get_shares_full(start='2023-01-01', end=None)
+        tso = tso[-1]
+
+        market_cap = data.fast_info.market_cap
+
+        hist = data.history(period="1d")
+        closing_dict = hist.to_dict()['Close']
+        closing_price = next(iter(closing_dict.values()))
+
+        return DCF(cash_flow, 
+                balance_sheet, 
+                float(dr), 
+                float(growth_rate), 
+                int(n), 
+                tso, 
+                market_cap,
+                closing_price).calculate()
