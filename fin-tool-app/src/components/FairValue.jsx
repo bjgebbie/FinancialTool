@@ -19,7 +19,6 @@ function FairValue(props) {
                 const responseList = response.split(',')
                 setCurrentPrice(responseList[0]);
                 setFairValue(responseList[1]);
-                console.log(responseList)
             }
         )
         getDcfEFairValue(symbol, growthRate, dr, n).then(

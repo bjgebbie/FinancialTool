@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import StockInfo from "../components/StockInfo";
+import '../css/titleBarStyle.css';
 
 function Analysis () {
     
@@ -33,25 +34,24 @@ function Analysis () {
         setN(event.target.value);
     }
     function handleBlur(){
-        setSelectedSymbol(symbol);
+        if (symbol !== '') {
+            setShowDetails(true);
+            setSelectedSymbol(symbol);
+        } else {
+            setShowDetails(false);
+        }
         setSelectedGr(growthRate);
         setSelectedDr(dr);
         setSelectedN(n);
-        setShowDetails(true);
     }
 
     return (
-        <div>
-            <Container fluid='md'>
-                <Stack gap={12} className="col-md-10">
-                    <Row >
-                        <Col md={{ span: 3, offset: 1 }}>
-                            <p><input type="text" value={symbol} onChange={handleSymbolChange} onBlur={handleBlur}/>: Symbol</p>
-                        </Col>
-                        <Col md={{ span: 5, offset: 1 }}>
-                            <h1>Brady's Financial App</h1>
-                        </Col>
-                    </Row>    
+        <div class='style'>
+            <Container>        
+                <h1 class='style'> Brady's Financial App</h1>
+                <input class='style' placeholder='Symbol' type="text" value={symbol} onChange={handleSymbolChange} onBlur={handleBlur}/>
+                <Stack gap={12}>
+ 
                     <Row  md={{ span: 4, offset: 10 }}> 
                         {showDetails &&
                         <React.Fragment>

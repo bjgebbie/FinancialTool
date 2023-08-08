@@ -1,4 +1,5 @@
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function ValuationMeter(props) {
     const {currentValue, fairValue} = props;

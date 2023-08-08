@@ -1,12 +1,11 @@
 import React from 'react'
 import './App.css';
 import Analysis from './pages/Analysis'
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   
   return (
-    <div className="Info" style={{textAlign: "center"}}>
+    <div>
       <Analysis />
     </div>
   );
