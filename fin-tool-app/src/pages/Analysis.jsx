@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import FairValue from './FairValue';
-import GrowthRateTable from './GrowthRateTable';
+import FairValue from '../components/FairValue';
+import GrowthRateTable from '../components/GrowthRateTable';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
-import StockInfo from "./StockInfo";
+import StockInfo from "../components/StockInfo";
 
 function Analysis () {
     
