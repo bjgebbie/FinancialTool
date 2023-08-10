@@ -39,8 +39,8 @@ function GrowthRateTable(props) {
         <Table striped bordered hover>
             <thead>
                 <tr>
-                <th>Method</th>
-                <th>Growth Rate</th>
+                    <th>Method</th>
+                    <th>Growth Rate</th>
                 </tr>
             </thead>
             <tbody>
@@ -60,7 +60,7 @@ function GrowthRateTable(props) {
                     <td>Equity</td>
                     <td>{equityGR}</td>
                 </tr>
-        </tbody>
+            </tbody>
         </Table>
     );
 }

@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import StockInfo from "../components/StockInfo";
-import '../css/titleBarStyle.css';
+import '../css/analysisPage.css';
 
 function Analysis () {
     
@@ -46,38 +46,37 @@ function Analysis () {
     }
 
     return (
-        <div class='style'>
+        <div>
             <Container>        
-                <h1 class='style'> Brady's Financial App</h1>
-                <input class='style' placeholder='Symbol' type="text" value={symbol} onChange={handleSymbolChange} onBlur={handleBlur}/>
                 <Stack gap={12}>
- 
-                    <Row  md={{ span: 4, offset: 10 }}> 
+                    <Col>
+                        <h1 className='title'> Brady's Financial App</h1>
+                        <input className= 'symbolInput' placeholder='Symbol' type="text" value={symbol} onChange={handleSymbolChange} onBlur={handleBlur}/>
+                    </Col>
+                    <Row> 
                         {showDetails &&
-                        <React.Fragment>
-                        <Col >
-                        <React.Fragment>
-                            {   showDetails &&
-                                <React.Fragment>
-                                    <p>Growth Rate: <input type="text" value={growthRate} onChange={handleGrowthRateChange} onBlur={handleBlur}/></p>
-                                    <p>Discount Rate: <input type="text" value={dr} onChange={handleDrChange} onBlur={handleBlur}/></p>
-                                    <p>How many years: <input type="text" value={n} onChange={handleNChange} onBlur={handleBlur}/></p>
+                            <>
+                                <Col md={{ span: 4}} >
+                                    {   
+                                        <React.Fragment>
+                                            <p className='inputStyles'>Growth Rate: <input type="text" value={growthRate} onChange={handleGrowthRateChange} onBlur={handleBlur}/></p>
+                                            <p className='inputStyles'>Discount Rate: <input type="text" value={dr} onChange={handleDrChange} onBlur={handleBlur}/></p>
+                                            <p className='inputStyles'>How many years: <input type="text" value={n} onChange={handleNChange} onBlur={handleBlur}/></p>
+                                        </React.Fragment>
+                                    }
+                                </Col>
+                                <Col md={{ span: 4}}>
                                     <FairValue symbol={selectedSymbol} growthRate={selectedGr} dr={selectedDr} n={selectedN}/>
-                                </React.Fragment>
-                            }
-                        </React.Fragment>
-                        </Col>
-                        <Col>
-                        {
-                            showDetails &&
-                            <React.Fragment>
-                                <StockInfo symbol={selectedSymbol} />
-                                <GrowthRateTable symbol={selectedSymbol} />
-                            </React.Fragment>
-                        }
-                        </Col>
-                        </React.Fragment>
-
+                                </Col>
+                                <Col className='col-2' md={{ offset: 1 }}>
+                                    {
+                                        <div className="infoPanel">
+                                            <StockInfo symbol={selectedSymbol}/>
+                                            <GrowthRateTable symbol={selectedSymbol} />
+                                        </div>
+                                    }
+                                </Col>
+                           </>
                         }
                     </Row>
                 </Stack>

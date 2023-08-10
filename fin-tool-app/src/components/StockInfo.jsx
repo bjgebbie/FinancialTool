@@ -32,16 +32,18 @@ function StockInfo (props) {
         }, [symbol]
       );
     
-    return(<div>
-        <Container>
-            <ListGroup>
-                <ListGroup.Item>Diluted EPS: {dilutedEps}</ListGroup.Item>
-                <ListGroup.Item>EPS: {eps}</ListGroup.Item>
-                <ListGroup.Item>Net D/E: {deRatio}</ListGroup.Item>
-                <ListGroup.Item>P/E: {Math.round((currentPrice * 100/ eps))/100}</ListGroup.Item>
-            </ListGroup>
-        </Container>
-    </div>)
+    return(
+        <div>
+            <Container>
+                <ListGroup>
+                    <ListGroup.Item>Diluted EPS: {dilutedEps}</ListGroup.Item>
+                    <ListGroup.Item>EPS: {eps}</ListGroup.Item>
+                    <ListGroup.Item>Net D/E: {deRatio}</ListGroup.Item>
+                    <ListGroup.Item>P/E: {Math.round((currentPrice * 100/ eps))/100}</ListGroup.Item>
+                </ListGroup>
+            </Container>
+        </div>
+    )
     
 }
 

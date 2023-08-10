@@ -1,0 +1,47 @@
+.title {
+  position: relative;
+  color: rgb(255, 255, 255);
+  background-color: rgb(13, 202, 240);
+  height: 60px;
+  top: 10px;
+  width: 600px;
+  left: 50%;
+  margin-left: -300px;
+  text-align: center;
+  border-radius: 10px;
+  }
+  .symbolInput {
+    position: relative;
+    border: 3px solid rgb(13, 202, 240);
+    color: rgb(13, 202, 240);
+    height: 46px;
+    top: 20px;
+    width: 126px;
+    left: 50%;
+    margin-left: -63px;
+    text-align: center;
+    text-decoration-color: rgb(13, 202, 240);
+    border-radius: 10px;
+}
+.symbolInput:focus {
+  position: relative; 
+  border: 5px solid rgb(13, 202, 240);
+  outline: rgb(41, 203, 231);
+}
+.symbolInput::placeholder{
+  color: rgb(13, 202, 240);
+}
+.infoPanel{
+  text-align: center;
+  justify-content: left;
+  float: left;
+  margin-left: -50px;
+}
+.inputStyles {
+  justify-content: right;
+  float: right;
+}
+.fairValue {
+  margin-top: 10%;
+  text-align: center;
+}

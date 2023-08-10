@@ -31,7 +31,7 @@ function FairValue(props) {
     }, [symbol, growthRate, dr, n])
 
     return (
-        <div>
+        <div className='fairValue'>
             <Container>
                 <ListGroup>
                     <ListGroup.Item><h1>Fair Value: ${fairValue}</h1></ListGroup.Item>
