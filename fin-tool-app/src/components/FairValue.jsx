@@ -33,17 +33,18 @@ function FairValue(props) {
     return (
         <div className='fairValue'>
             <Container>
-                <ListGroup>
-                    <ListGroup.Item><h1>Fair Value: ${fairValue}</h1></ListGroup.Item>
-                    <ListGroup.Item><h1>Current Value: ${currentPrice}</h1></ListGroup.Item>
-                </ListGroup>
+                <h2 className='fairValueItem'>Fair Value</h2>
+                <h2 className='fairValueText'>${fairValue}</h2>
+                <h2 className='fairValueItem'>Current Value</h2>
+                <h2 className='fairValueText'> {currentPrice} </h2>
                 <ValuationMeter currentValue={currentPrice} fairValue={fairValue}/>
-                <ListGroup>
-                    <ListGroup.Item><h1>Fair Enterprise Value: ${fairValueE}</h1></ListGroup.Item>
-                    <ListGroup.Item><h1>Enterprise Value: ${enterpriseValue}</h1></ListGroup.Item>
-                </ListGroup>
+            </Container>
+            <Container style={{marginTop: 20}}>
+                <h2 className='fairValueItem'>Fair Enterprise Value </h2> 
+                <h2 className='fairValueText'>{fairValueE}</h2>
+                <h2 className='fairValueItem'>Enterprise Value</h2>
+                <h2 className='fairValueText'>${enterpriseValue}</h2>
                 <ValuationMeter currentValue={enterpriseValue} fairValue={fairValueE}/>
-
             </Container>
             
         </div>

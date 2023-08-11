@@ -1,9 +1,14 @@
 import yfinance as yf
+from utils.sp500 import getSp500Companies
 
 class StockInfo:
     def get(request):
+
         symbol = request.args.get('symbol')
         data = yf.Ticker(symbol)
+
+        if symbol == '' or symbol.upper() not in getSp500Companies():
+            return [0, 0, 0, 0]
 
         balance_sheet = data.balance_sheet.to_dict()
     

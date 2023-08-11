@@ -8,7 +8,7 @@ function ValuationMeter(props) {
         
         return (
             <div>
-                <ProgressBar>
+                <ProgressBar style={{height: 36}}>
                     <ProgressBar variant="info" now={now} key={1} />
                     <ProgressBar striped variant="success" now={remain} key={2} label={`${Math.round(remain)}%`} />
                 </ProgressBar>

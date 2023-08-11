@@ -1,4 +1,5 @@
 from utils.enterpriseValue import get_enterprise_value
+from utils.sp500 import getSp500Companies
 import yfinance as yf
 import numpy as np
 
@@ -35,8 +36,8 @@ class DCFEnterprise:
     
     def get(request):
         symbol = request.args.get('symbol')
-        if symbol == '':
-            return ''
+        if symbol == '' or symbol.upper() not in getSp500Companies():
+            return [0, 0]
         
         growth_rate = request.args.get('growthRate')
         dr = request.args.get('dr')
@@ -47,7 +48,7 @@ class DCFEnterprise:
         balance_sheet = data.balance_sheet.to_dict()
 
         tso = data.get_shares_full(start='2023-01-01', end=None)
-        tso = tso[tso.size-1]
+        tso = tso[-1]
 
         market_cap = data.fast_info.market_cap
 

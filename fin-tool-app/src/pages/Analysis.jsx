@@ -56,13 +56,13 @@ function Analysis () {
                     <Row> 
                         {showDetails &&
                             <>
-                                <Col md={{ span: 4}} >
+                                <Col md={{ span: 2, offset: 2}} >
                                     {   
-                                        <React.Fragment>
-                                            <p className='inputStyles'>Growth Rate: <input type="text" value={growthRate} onChange={handleGrowthRateChange} onBlur={handleBlur}/></p>
-                                            <p className='inputStyles'>Discount Rate: <input type="text" value={dr} onChange={handleDrChange} onBlur={handleBlur}/></p>
-                                            <p className='inputStyles'>How many years: <input type="text" value={n} onChange={handleNChange} onBlur={handleBlur}/></p>
-                                        </React.Fragment>
+                                        <Stack md>
+                                            <p className='pStyles'>Growth Rate: <input className='inputsStyle' type="text" value={growthRate} onChange={handleGrowthRateChange} onBlur={handleBlur}/></p>
+                                            <p className='pStyles'>Discount Rate: <input className='inputsStyle' type="text" value={dr} onChange={handleDrChange} onBlur={handleBlur}/></p>
+                                            <p className='pStyles'>Time in Years: <input className='inputsStyle' type="text" value={n} onChange={handleNChange} onBlur={handleBlur}/></p>
+                                        </Stack>
                                     }
                                 </Col>
                                 <Col md={{ span: 4}}>

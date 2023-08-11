@@ -1,9 +1,13 @@
 import yfinance as yf
+from utils.sp500 import getSp500Companies
 
 class CAGR:
     def get(request):
         symbol = request.args.get('symbol')
         growth_rate_type = request.args.get('growthRateType')
+
+        if symbol == '' or symbol.upper() not in getSp500Companies():
+            return [0.00]
 
         data = yf.Ticker(symbol)
 

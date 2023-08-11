@@ -1,5 +1,7 @@
 import numpy as np
 import yfinance as yf
+from utils.sp500 import getSp500Companies
+
 ''' 
     ocf: operating cash flow 
     dr: discount rate (return you want to achieve)
@@ -51,8 +53,8 @@ class DCF:
     
     def get(request):
         symbol = request.args.get('symbol')
-        if symbol == '':
-            return ''
+        if symbol == '' or symbol.upper() not in getSp500Companies():
+            return [0, 0]
         
         growth_rate = request.args.get('growthRate')
         dr = request.args.get('dr')
