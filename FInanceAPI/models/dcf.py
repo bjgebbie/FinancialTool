@@ -5,7 +5,7 @@ from utils.sp500 import getSp500Companies
 ''' 
     ocf: operating cash flow 
     dr: discount rate (return you want to achieve)
-    p2fcf: price to free cash flow (rn cvs is 5.24 need to make function to calculate this number later)
+    p2fcf: price to free cash flow
     growth: growth rate of the company
     mce: maintenance capital expenditure (AKA properties, plant and equipment)
     n: how many years we are we are discounting into the future

@@ -82,8 +82,6 @@ function Analysis () {
                 </Stack>
 
             </Container>
-            
-
         </div>
     );
 }
