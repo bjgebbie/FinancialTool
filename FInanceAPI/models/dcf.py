@@ -53,8 +53,6 @@ class DCF:
     
     def get(request):
         symbol = request.args.get('symbol')
-        if symbol == '' or symbol.upper() not in getSp500Companies():
-            return [0, 0]
         
         growth_rate = request.args.get('growthRate')
         dr = request.args.get('dr')

@@ -1,6 +1,8 @@
 # Fetching the latest node image on alpine linux
 FROM node:alpine AS development
 
+EXPOSE 3000
+
 # Declaring env
 ENV NODE_ENV development
 
