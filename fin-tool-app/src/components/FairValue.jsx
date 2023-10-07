@@ -2,8 +2,8 @@ import React, { useState, useEffect} from 'react';
 import getDcfFairValue from '../myFinanceAPI/getDcfFairValue';
 import getDcfEFairValue from '../myFinanceAPI/getDcfEFairValue'
 import Container from 'react-bootstrap/Container';
-import ListGroup from 'react-bootstrap/ListGroup';
 import ValuationMeter from './ValuationMeter';
+import getTop20 from '../myFinanceAPI/getTop20';
 
 
 function FairValue(props) {
@@ -26,6 +26,11 @@ function FairValue(props) {
                 const responseList = response.split(',')
                 setFairValueE(responseList[0])
                 setEnterpriseValue(responseList[1])
+            }
+        )
+        getTop20(growthRate, dr, n).then(
+            (response) => {
+                console.log(response)
             }
         )
     }, [symbol, growthRate, dr, n])

@@ -4,13 +4,6 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import getStockInfo from '../myFinanceAPI/getStockInfo';
 
 function StockInfo (props) {
-    /**
-     * Price
-     * diluted_EPS
-     * EPS
-     * DE
-     * P/E
-     */
     const { symbol } = props 
     const [currentPrice, setCurrentPrice] = useState('0.000');
     const [dilutedEps, setDilutedEps] = useState('0.000');
@@ -33,16 +26,14 @@ function StockInfo (props) {
       );
     
     return(
-        <div>
-            <Container>
-                <ListGroup>
-                    <ListGroup.Item>Diluted EPS: {dilutedEps}</ListGroup.Item>
-                    <ListGroup.Item>EPS: {eps}</ListGroup.Item>
-                    <ListGroup.Item>Net D/E: {deRatio}</ListGroup.Item>
-                    <ListGroup.Item>P/E: {Math.round((currentPrice * 100/ eps))/100}</ListGroup.Item>
-                </ListGroup>
-            </Container>
-        </div>
+        <Container>
+            <ListGroup>
+                <ListGroup.Item>Diluted EPS: {dilutedEps}</ListGroup.Item>
+                <ListGroup.Item>EPS: {eps}</ListGroup.Item>
+                <ListGroup.Item>Net D/E: {deRatio}</ListGroup.Item>
+                <ListGroup.Item>P/E: {Math.round((currentPrice * 100/ eps))/100}</ListGroup.Item>
+            </ListGroup>
+        </Container>
     )
     
 }

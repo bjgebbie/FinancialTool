@@ -80,7 +80,6 @@ function Analysis () {
                         }
                     </Row>
                 </Stack>
-
             </Container>
         </div>
     );

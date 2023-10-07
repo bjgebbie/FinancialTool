@@ -24,13 +24,14 @@ class DCF:
     def __init__(self, cash_flow, balance_sheet, dr, growth_rate, n, tso, market_cap, closing_price):
         self.cash_flow = cash_flow[list(cash_flow)[0]]
         self.balance_sheet = balance_sheet[list(balance_sheet)[0]]
+
         self.ocf = self.cash_flow['Operating Cash Flow']
-        self.mce = self.cash_flow['Net PPE Purchase And Sale'] if not np.isnan(self.cash_flow['Net PPE Purchase And Sale']) else 0.0
+        self.mce = self.cash_flow['Net PPE Purchase And Sale'] if 'Net PPE Purchase And Sale' in self.cash_flow else 0.0
+        self.csms = self.balance_sheet['Cash Cash Equivalents And Short Term Investments'] if 'Cash Cash Equivalents And Short Term Investments' in self.balance_sheet else 0.0
         self.dr = dr
         self.fcf = self.ocf + self.mce
         self.p2fcf = market_cap / self.fcf
         self.growth_rate = growth_rate
-        self.csms = self.balance_sheet['Cash Cash Equivalents And Short Term Investments']
         self.n = n
         self.tso = tso
         self.closing_price = closing_price
@@ -51,8 +52,9 @@ class DCF:
 
         return [str(round(self.closing_price,3 )), str(round(value, 3))]
     
-    def get(request):
-        symbol = request.args.get('symbol')
+    def get(request, symbol=None):
+        if symbol == None:
+            symbol = request.args.get('symbol')
         
         growth_rate = request.args.get('growthRate')
         dr = request.args.get('dr')

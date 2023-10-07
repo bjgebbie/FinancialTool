@@ -4,6 +4,7 @@ from models.dcf import DCF
 from models.dcfEnterprise import DCFEnterprise
 from utils.cagr import CAGR
 from utils.stockInfo import StockInfo
+from utils.top20 import Top20
 
 
 app = Flask(__name__)
@@ -25,6 +26,10 @@ def get_cagr():
 @app.route('/StockInfo')
 def get_stock_info():
     return StockInfo.get(request)
+
+@app.route('/Top20')
+def get_top_20():
+    return Top20(request)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
