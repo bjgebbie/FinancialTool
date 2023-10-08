@@ -1,6 +1,5 @@
 import numpy as np
 import yfinance as yf
-from utils.sp500 import getSp500Companies
 
 ''' 
     ocf: operating cash flow 
@@ -52,13 +51,7 @@ class DCF:
 
         return [str(round(self.closing_price,3 )), str(round(value, 3))]
     
-    def get(request, symbol=None):
-        if symbol == None:
-            symbol = request.args.get('symbol')
-        
-        growth_rate = request.args.get('growthRate')
-        dr = request.args.get('dr')
-        n = request.args.get('n')
+    def get(growth_rate, dr, n, symbol=None):
 
         data = yf.Ticker(symbol)
         cash_flow = data.cash_flow.to_dict()
@@ -73,11 +66,13 @@ class DCF:
         closing_dict = hist.to_dict()['Close']
         closing_price = next(iter(closing_dict.values()))
 
-        return DCF(cash_flow, 
-                balance_sheet, 
-                float(dr), 
-                float(growth_rate), 
-                int(n), 
-                tso, 
-                market_cap,
-                closing_price).calculate()
+        return DCF  (
+                        cash_flow, 
+                        balance_sheet, 
+                        float(dr), 
+                        float(growth_rate), 
+                        int(n), 
+                        tso, 
+                        market_cap,
+                        closing_price
+                    ).calculate()

@@ -12,7 +12,11 @@ CORS(app)
 
 @app.route('/Dcf')
 def get_dcf():
-    return DCF.get(request)
+    symbol = request.args.get('symbol')
+    growth_rate = request.args.get('growthRate')
+    dr = request.args.get('dr')
+    n = request.args.get('n')
+    return DCF.get(growth_rate, dr, n, symbol=symbol)
 
 @app.route('/DcfE')
 def get_dcf_e():
