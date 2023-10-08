@@ -1,7 +1,7 @@
 import React , { useState, useEffect }from 'react';
 import Container from 'react-bootstrap/Container';
 import ListGroup from 'react-bootstrap/ListGroup';
-import getStockInfo from '../myFinanceAPI/getStockInfo';
+import getStockInfo from '../../myFinanceAPI/getStockInfo';
 
 function StockInfo (props) {
     const { symbol } = props 

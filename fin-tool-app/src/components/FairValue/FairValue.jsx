@@ -1,9 +1,9 @@
 import React, { useState, useEffect} from 'react';
-import getDcfFairValue from '../myFinanceAPI/getDcfFairValue';
-import getDcfEFairValue from '../myFinanceAPI/getDcfEFairValue'
+import getDcfFairValue from '../../myFinanceAPI/getDcfFairValue';
+import getDcfEFairValue from '../../myFinanceAPI/getDcfEFairValue'
 import Container from 'react-bootstrap/Container';
-import ValuationMeter from './ValuationMeter';
-import getTop20 from '../myFinanceAPI/getTop20';
+import ValuationMeter from '../ValuationMeter/ValuationMeter';
+import getTop20 from '../../myFinanceAPI/getTop20';
 
 
 function FairValue(props) {
@@ -28,11 +28,11 @@ function FairValue(props) {
                 setEnterpriseValue(responseList[1])
             }
         )
-        getTop20(growthRate, dr, n).then(
-            (response) => {
-                console.log(response)
-            }
-        )
+        // getTop20(growthRate, dr, n).then(
+        //     (response) => {
+        //         console.log(response)
+        //     }
+        // )
     }, [symbol, growthRate, dr, n])
 
     return (
@@ -51,7 +51,6 @@ function FairValue(props) {
                 <h2 className='fairValueText'>${enterpriseValue}</h2>
                 <ValuationMeter currentValue={enterpriseValue} fairValue={fairValueE}/>
             </Container>
-            
         </div>
     )
 }

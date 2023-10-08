@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import FairValue from '../components/FairValue';
-import GrowthRateTable from '../components/GrowthRateTable';
+import FairValue from '../../components/FairValue/FairValue';
+import GrowthRateTable from '../../components/GrowthRateTable/GrowthRateTable';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
-import StockInfo from "../components/StockInfo";
-import '../css/analysisPage.css';
+import StockInfo from "../../components/StockInfo/StockInfo";
+import './analysis.css';
 
 function Analysis () {
     

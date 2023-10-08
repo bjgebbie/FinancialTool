@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Table from 'react-bootstrap/Table'
-import getGrowthRate from "../myFinanceAPI/getGrowthRate";
+import getGrowthRate from "../../myFinanceAPI/getGrowthRate";
 
 
 function GrowthRateTable(props) {
