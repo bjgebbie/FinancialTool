@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import StockInfo from "../../components/StockInfo/StockInfo";
 import './analysis.css';
+import Top20Table from '../../components/Top20Table/Top20Table';
 
 function Analysis () {
     
@@ -46,42 +47,40 @@ function Analysis () {
     }
 
     return (
-        <div>
+        <Container>
+            <Container>
+                <Top20Table/>
+            </Container>
             <Container>        
                 <Stack gap={12}>
-                    <Col>
-                        <h1 className='title'> Brady's Financial App</h1>
-                        <input className= 'symbolInput' placeholder='Symbol' type="text" value={symbol} onChange={handleSymbolChange} onBlur={handleBlur}/>
-                    </Col>
+                    <h1 className='title'> Brady's Financial App</h1>
+                    <input className= 'symbolInput' placeholder='Symbol' type="text" value={symbol} onChange={handleSymbolChange} onBlur={handleBlur}/>
                     <Row> 
                         {showDetails &&
                             <>
                                 <Col md={{ span: 2, offset: 2}} >
-                                    {   
-                                        <Stack md>
-                                            <p className='pStyles'>Growth Rate: <input className='inputsStyle' type="text" value={growthRate} onChange={handleGrowthRateChange} onBlur={handleBlur}/></p>
-                                            <p className='pStyles'>Discount Rate: <input className='inputsStyle' type="text" value={dr} onChange={handleDrChange} onBlur={handleBlur}/></p>
-                                            <p className='pStyles'>Time in Years: <input className='inputsStyle' type="text" value={n} onChange={handleNChange} onBlur={handleBlur}/></p>
-                                        </Stack>
-                                    }
+                                    <Stack md>
+                                        <p className='pStyles'>Growth Rate: <input className='inputsStyle' type="text" value={growthRate} onChange={handleGrowthRateChange} onBlur={handleBlur}/></p>
+                                        <p className='pStyles'>Discount Rate: <input className='inputsStyle' type="text" value={dr} onChange={handleDrChange} onBlur={handleBlur}/></p>
+                                        <p className='pStyles'>Time in Years: <input className='inputsStyle' type="text" value={n} onChange={handleNChange} onBlur={handleBlur}/></p>
+                                    </Stack>
                                 </Col>
                                 <Col md={{ span: 4}}>
                                     <FairValue symbol={selectedSymbol} growthRate={selectedGr} dr={selectedDr} n={selectedN}/>
                                 </Col>
                                 <Col className='col-2' md={{ offset: 1 }}>
-                                    {
-                                        <div className="infoPanel">
-                                            <StockInfo symbol={selectedSymbol}/>
-                                            <GrowthRateTable symbol={selectedSymbol} />
-                                        </div>
-                                    }
+                                    
+                                    <div className="infoPanel">
+                                        <StockInfo symbol={selectedSymbol}/>
+                                        <GrowthRateTable symbol={selectedSymbol} />
+                                    </div>
                                 </Col>
                            </>
                         }
                     </Row>
                 </Stack>
             </Container>
-        </div>
+        </Container>
     );
 }
 

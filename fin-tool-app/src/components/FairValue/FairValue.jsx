@@ -28,11 +28,6 @@ function FairValue(props) {
                 setEnterpriseValue(responseList[1])
             }
         )
-        // getTop20(growthRate, dr, n).then(
-        //     (response) => {
-        //         console.log(response)
-        //     }
-        // )
     }, [symbol, growthRate, dr, n])
 
     return (
