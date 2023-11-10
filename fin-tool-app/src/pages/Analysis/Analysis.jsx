@@ -54,36 +54,26 @@ function Analysis () {
                 } */}
             </Container>
             <Container>
-                <Container>
-                    <input
-                        className='symbolInput'
-                        placeholder='Symbol'
-                        type="text"
-                        value={symbol}
-                        onChange={handleSymbolChange}
-                        onBlur={handleBlur} />
+                <input
+                    className='symbolInput'
+                    placeholder='Symbol'
+                    type="text"
+                    value={symbol}
+                    onChange={handleSymbolChange}
+                    onBlur={handleBlur} />
 
-                    {showDetails &&
+                {showDetails &&
                         <Container>
-                            <Container>
-                                <Container md>
-                                    <p className='pStyles'>Growth Rate: <input className='inputsStyle' type="text" value={growthRate} onChange={handleGrowthRateChange} onBlur={handleBlur} /></p>
-                                    <p className='pStyles'>Discount Rate: <input className='inputsStyle' type="text" value={dr} onChange={handleDrChange} onBlur={handleBlur} /></p>
-                                    <p className='pStyles'>Time in Years: <input className='inputsStyle' type="text" value={n} onChange={handleNChange} onBlur={handleBlur} /></p>
-                                </Container>
+                            <Container md>
+                                <p className='pStyles'>Growth Rate: <input className='inputsStyle' type="text" value={growthRate} onChange={handleGrowthRateChange} onBlur={handleBlur} /></p>
+                                <p className='pStyles'>Discount Rate: <input className='inputsStyle' type="text" value={dr} onChange={handleDrChange} onBlur={handleBlur} /></p>
+                                <p className='pStyles'>Time in Years: <input className='inputsStyle' type="text" value={n} onChange={handleNChange} onBlur={handleBlur} /></p>
                             </Container>
-                            <Container>
-                                <FairValue symbol={selectedSymbol} growthRate={selectedGr} dr={selectedDr} n={selectedN} />
-                            </Container>
-                            <Container>
-                                <Container>
-                                    <StockInfo symbol={selectedSymbol} />
-                                    <GrowthRateTable symbol={selectedSymbol} />
-                                </Container>
-                            </Container>
+                            <FairValue symbol={selectedSymbol} growthRate={selectedGr} dr={selectedDr} n={selectedN} />
+                            <StockInfo symbol={selectedSymbol} />
+                            <GrowthRateTable symbol={selectedSymbol} />
                         </Container>
-                    }
-                </Container>
+                }
             </Container>
         </Container>
     );

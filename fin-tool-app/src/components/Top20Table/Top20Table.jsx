@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-import Table from 'react-bootstrap/Table'
- 
-function Top20Table() {
-    
+import React, { useState, useEffect } from 'react';
+import Table from 'react-bootstrap/Table';
+
+function Top20Table () {
     useEffect(() => {
         // getTop20(growthRate, dr, n).then(
         //     (response) => {
@@ -29,4 +28,4 @@ function Top20Table() {
     );
 }
 
-export default Top20Table
+export default Top20Table;

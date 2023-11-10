@@ -29,7 +29,7 @@ function FairValue (props) {
     }, [symbol, growthRate, dr, n]);
 
     return (
-        <div className='fairValue'>
+        <Container className='fairValue'>
             <Container>
                 <h2 className='fairValueItem'>Fair Value</h2>
                 <h2 className='fairValueText'>${fairValue}</h2>
@@ -44,7 +44,7 @@ function FairValue (props) {
                 <h2 className='fairValueText'>${enterpriseValue}</h2>
                 <ValuationMeter currentValue={enterpriseValue} fairValue={fairValueE}/>
             </Container>
-        </div>
+        </Container>
     );
 }
 

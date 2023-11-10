@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
-import Table from 'react-bootstrap/Table'
-import getGrowthRate from "../../myFinanceAPI/getGrowthRate";
+import React, { useState, useEffect } from 'react';
+import Table from 'react-bootstrap/Table';
+import getGrowthRate from '../../myFinanceAPI/getGrowthRate';
 
-
-function GrowthRateTable(props) {
+function GrowthRateTable (props) {
     const { symbol } = props;
     const [revenueGR, setRevenueGR] = useState('0.00');
     const [epsDGR, setEpsD] = useState('0.00');
@@ -11,30 +10,29 @@ function GrowthRateTable(props) {
     const [fcfGR, setFcfGrowthRate] = useState('0.00');
 
     useEffect(() => {
-        
-            getGrowthRate(symbol, 'Revenue').then(
-                (response) => {
-                    setRevenueGR(response)
-                }
-            );
-            getGrowthRate(symbol, 'Equity').then(
-                (response) => {
-                    setEquityGR(response)
-                }
-            );
-            getGrowthRate(symbol, 'EPS (Diluted)').then(
-                (response) => {
-                    setEpsD(response)
-                }
-            );
-            getGrowthRate(symbol, 'FCF').then(
-                (response) => {
-                    setFcfGrowthRate(response)
-                }
-            )
-        }, [symbol]
+        getGrowthRate(symbol, 'Revenue').then(
+            (response) => {
+                setRevenueGR(response);
+            }
+        );
+        getGrowthRate(symbol, 'Equity').then(
+            (response) => {
+                setEquityGR(response);
+            }
+        );
+        getGrowthRate(symbol, 'EPS (Diluted)').then(
+            (response) => {
+                setEpsD(response);
+            }
+        );
+        getGrowthRate(symbol, 'FCF').then(
+            (response) => {
+                setFcfGrowthRate(response);
+            }
+        );
+    }, [symbol]
     );
-    
+
     return (
         <Table striped bordered hover>
             <thead>
@@ -65,4 +63,4 @@ function GrowthRateTable(props) {
     );
 }
 
-export default GrowthRateTable
+export default GrowthRateTable;
