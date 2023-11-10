@@ -2,15 +2,10 @@ import React, { useState } from 'react';
 import FairValue from '../../components/FairValue/FairValue';
 import GrowthRateTable from '../../components/GrowthRateTable/GrowthRateTable';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Stack from 'react-bootstrap/Stack';
-import StockInfo from "../../components/StockInfo/StockInfo";
+import StockInfo from '../../components/StockInfo/StockInfo';
 import './analysis.css';
-import Top20Table from '../../components/Top20Table/Top20Table';
 
 function Analysis () {
-    
     const [symbol, setSymbol] = useState('');
     const [growthRate, setGrowthRate] = useState('0.10');
     const [dr, setDr] = useState('0.15');
@@ -31,10 +26,11 @@ function Analysis () {
     function handleDrChange (event) {
         setDr(event.target.value);
     }
+
     function handleNChange (event) {
         setN(event.target.value);
     }
-    function handleBlur(){
+    function handleBlur () {
         if (symbol !== '') {
             setShowDetails(true);
             setSelectedSymbol(symbol);
@@ -49,39 +45,48 @@ function Analysis () {
     return (
         <Container>
             <Container>
-                <Top20Table/>
+                {/* {showDetails &&
+                <Top20Table
+                    growthRate={growthRate}
+                    dr={dr}
+                    n={n}
+                />
+                } */}
             </Container>
-            <Container>        
-                <Stack gap={12}>
-                    <h1 className='title'> Brady's Financial App</h1>
-                    <input className= 'symbolInput' placeholder='Symbol' type="text" value={symbol} onChange={handleSymbolChange} onBlur={handleBlur}/>
-                    <Row> 
-                        {showDetails &&
-                            <>
-                                <Col md={{ span: 2, offset: 2}} >
-                                    <Stack md>
-                                        <p className='pStyles'>Growth Rate: <input className='inputsStyle' type="text" value={growthRate} onChange={handleGrowthRateChange} onBlur={handleBlur}/></p>
-                                        <p className='pStyles'>Discount Rate: <input className='inputsStyle' type="text" value={dr} onChange={handleDrChange} onBlur={handleBlur}/></p>
-                                        <p className='pStyles'>Time in Years: <input className='inputsStyle' type="text" value={n} onChange={handleNChange} onBlur={handleBlur}/></p>
-                                    </Stack>
-                                </Col>
-                                <Col md={{ span: 4}}>
-                                    <FairValue symbol={selectedSymbol} growthRate={selectedGr} dr={selectedDr} n={selectedN}/>
-                                </Col>
-                                <Col className='col-2' md={{ offset: 1 }}>
-                                    
-                                    <div className="infoPanel">
-                                        <StockInfo symbol={selectedSymbol}/>
-                                        <GrowthRateTable symbol={selectedSymbol} />
-                                    </div>
-                                </Col>
-                           </>
-                        }
-                    </Row>
-                </Stack>
+            <Container>
+                <Container>
+                    <input
+                        className='symbolInput'
+                        placeholder='Symbol'
+                        type="text"
+                        value={symbol}
+                        onChange={handleSymbolChange}
+                        onBlur={handleBlur} />
+
+                    {showDetails &&
+                        <Container>
+                            <Container>
+                                <Container md>
+                                    <p className='pStyles'>Growth Rate: <input className='inputsStyle' type="text" value={growthRate} onChange={handleGrowthRateChange} onBlur={handleBlur} /></p>
+                                    <p className='pStyles'>Discount Rate: <input className='inputsStyle' type="text" value={dr} onChange={handleDrChange} onBlur={handleBlur} /></p>
+                                    <p className='pStyles'>Time in Years: <input className='inputsStyle' type="text" value={n} onChange={handleNChange} onBlur={handleBlur} /></p>
+                                </Container>
+                            </Container>
+                            <Container>
+                                <FairValue symbol={selectedSymbol} growthRate={selectedGr} dr={selectedDr} n={selectedN} />
+                            </Container>
+                            <Container>
+                                <Container>
+                                    <StockInfo symbol={selectedSymbol} />
+                                    <GrowthRateTable symbol={selectedSymbol} />
+                                </Container>
+                            </Container>
+                        </Container>
+                    }
+                </Container>
             </Container>
         </Container>
     );
 }
 
-export default Analysis
+export default Analysis;
