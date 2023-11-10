@@ -15,6 +15,9 @@
         "react"
     ],
     "rules": {
+        "camelcase": ["error", {
+        "properties": "always"
+        }],
         "indent": ["error", 4],
         "quotes": ["error", "single"],
         "semi": ["error", "always"],
