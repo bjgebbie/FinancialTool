@@ -11,5 +11,5 @@ export default async function getGrowthRate (symbol, growthRateType) {
             }
         }
     );
-    return response.data.toString();
+    return response;
 }

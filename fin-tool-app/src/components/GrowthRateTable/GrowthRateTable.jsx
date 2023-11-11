@@ -1,10 +1,12 @@
+import { Box, List, ListItem, ListItemText, ListItemButton } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-import Table from 'react-bootstrap/Table';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
+import { setGrowthRate } from '../../features/inputs';
 import getGrowthRate from '../../myFinanceAPI/getGrowthRate';
 
 function GrowthRateTable () {
+    const dispatch = useDispatch();
     const { symbol } = useSelector((state) => state.inputs);
     const [revenueGR, setRevenueGR] = useState('0.00');
     const [epsDGR, setEpsD] = useState('0.00');
@@ -14,54 +16,69 @@ function GrowthRateTable () {
     useEffect(() => {
         getGrowthRate(symbol, 'Revenue').then(
             (response) => {
-                setRevenueGR(response);
-            }
-        );
-        getGrowthRate(symbol, 'Equity').then(
-            (response) => {
-                setEquityGR(response);
-            }
-        );
-        getGrowthRate(symbol, 'EPS (Diluted)').then(
-            (response) => {
-                setEpsD(response);
-            }
-        );
-        getGrowthRate(symbol, 'FCF').then(
-            (response) => {
-                setFcfGrowthRate(response);
+                const growthRates = response.data;
+                setRevenueGR(growthRates.revenue);
+                setEpsD(growthRates.dilutedEps);
+                setEquityGR(growthRates.equity);
+                setFcfGrowthRate(growthRates.fcf);
             }
         );
     }, [symbol]
     );
 
     return (
-        <Table striped bordered hover>
-            <thead>
-                <tr>
-                    <th>Method</th>
-                    <th>Growth Rate</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Revenue</td>
-                    <td>{revenueGR}</td>
-                </tr>
-                <tr>
-                    <td>EPS (Diluted)</td>
-                    <td>{epsDGR}</td>
-                </tr>
-                <tr>
-                    <td>FCF</td>
-                    <td>{fcfGR}</td>
-                </tr>
-                <tr>
-                    <td>Equity</td>
-                    <td>{equityGR}</td>
-                </tr>
-            </tbody>
-        </Table>
+        <Box
+            style={{
+                display: 'flex',
+                flexDirection: 'row',
+                border: 'solid 1px #000',
+                maxWidth: '280px'
+            }}>
+            <List>
+                <ListItem style={{
+                    borderColor: '#000'
+                }}
+                divider>
+                    <ListItemText primary='FCF' />
+                </ListItem>
+                <ListItem divider>
+                    <ListItemText primary='Revenue' />
+                </ListItem>
+                <ListItem divider>
+                    <ListItemText primary='Diluted EPS' />
+                </ListItem>
+                <ListItem divider>
+                    <ListItemText primary='Equity' />
+                </ListItem>
+            </List>
+            <List>
+                <ListItemButton
+                    divider
+                    onClick={() => dispatch(setGrowthRate(fcfGR))}
+                >
+                    <ListItemText primary={fcfGR}/>
+                </ListItemButton>
+                <ListItemButton
+                    divider
+                    onClick={() => dispatch(setGrowthRate(revenueGR))}
+                >
+                    <ListItemText primary={revenueGR} />
+                </ListItemButton>
+                <ListItemButton
+                    divider
+                    onClick={() => dispatch(setGrowthRate(epsDGR))}
+                >
+                    <ListItemText primary={epsDGR} />
+                </ListItemButton>
+                <ListItemButton
+                    divider
+                    onClick={() => dispatch(setGrowthRate(equityGR))}
+                >
+                    <ListItemText primary={equityGR} />
+                </ListItemButton>
+            </List>
+        </Box>
+
     );
 }
 

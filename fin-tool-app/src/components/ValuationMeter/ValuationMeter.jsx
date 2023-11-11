@@ -1,9 +1,11 @@
 import { Box } from '@mui/material';
 import React from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import { useSelector } from 'react-redux';
 
-function ValuationMeter (props) {
-    const { currentValue, fairValue } = props;
+function ValuationMeter () {
+    const { currentValue, fairValue } = useSelector((state) => state.values);
+
     if (Number(fairValue) >= Number(currentValue)) {
         const now = 100 * currentValue / fairValue;
         const remain = 100 - now;

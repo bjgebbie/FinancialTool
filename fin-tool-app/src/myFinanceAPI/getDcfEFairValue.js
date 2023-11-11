@@ -14,5 +14,5 @@ export default async function getDcfEFairValue (symbol, growthRate, dr, n) {
         }
     );
 
-    return response.data.toString();
+    return response;
 }

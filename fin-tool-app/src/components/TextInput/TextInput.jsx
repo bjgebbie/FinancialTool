@@ -1,5 +1,5 @@
 import { Grid, Typography } from '@mui/material';
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import './text-input.css';
@@ -21,6 +21,10 @@ function Input (props) {
         const decmialIndex = inputValue.indexOf('.') + 1;
         return event.target.setSelectionRange(decmialIndex, inputValue.length);
     }
+
+    useEffect(() => {
+        setInputValue(value);
+    }, [value]);
 
     return (
         <Grid

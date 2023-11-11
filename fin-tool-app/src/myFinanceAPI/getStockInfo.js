@@ -10,5 +10,5 @@ export default async function getStockInfo (symbol) {
             }
         }
     );
-    return response.data.toString();
+    return response;
 }

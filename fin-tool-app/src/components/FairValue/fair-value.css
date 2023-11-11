@@ -1,11 +1,12 @@
 .fair-value-container {
-    flex-direction: row;
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
 }
 
 .fair-value-item {
     display: flex;
     flex-direction: row;
-    width: 400px;
     flex-wrap: wrap;
 }
 
@@ -20,8 +21,4 @@
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
-}
-
-.fair-value-enterprise-item {
-    width: 400px;
 }

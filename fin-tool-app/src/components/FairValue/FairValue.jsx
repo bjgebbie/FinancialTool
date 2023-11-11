@@ -1,33 +1,31 @@
 import { Grid, Typography } from '@mui/material';
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { setFairValue, setFairEnterpriseValue, setEnterpriseValue } from '../../features/values';
 import getDcfEFairValue from '../../myFinanceAPI/getDcfEFairValue';
 import getDcfFairValue from '../../myFinanceAPI/getDcfFairValue';
 import ValuationMeter from '../ValuationMeter/ValuationMeter';
 import './fair-value.css';
 
 function FairValue () {
+    const dispatch = useDispatch();
     const { symbol, growthRate, discountRate, years } = useSelector((state) => state.inputs);
-
-    const [fairValue, setFairValue] = useState('0.000');
-    const [fairValueEnterprise, setFairValueEnterprise] = useState('0.000');
-    const [enterpriseValue, setEnterpriseValue] = useState('0.000');
-    const [currentPrice, setCurrentPrice] = useState('0.000');
+    const { fairValue, fairEnterpriseValue, enterpriseValue } = useSelector((state) => state.values);
 
     useEffect(() => {
         getDcfFairValue(symbol, growthRate, discountRate, years).then(
             (response) => {
-                const responseList = response.split(',');
-                setCurrentPrice(responseList[0]);
-                setFairValue(responseList[1]);
+                const fairValue = response.data.value;
+                dispatch(setFairValue(fairValue));
             }
         );
         getDcfEFairValue(symbol, growthRate, discountRate, years).then(
             (response) => {
-                const responseList = response.split(',');
-                setFairValueEnterprise(responseList[0]);
-                setEnterpriseValue(responseList[1]);
+                const fairEnterpriseValue = response.data.fairEnterpriseValue;
+                const enterpriseValue = response.data.enterpriseValue;
+                dispatch(setFairEnterpriseValue(fairEnterpriseValue));
+                dispatch(setEnterpriseValue(enterpriseValue));
             }
         );
     }, [symbol, growthRate, discountRate, years]);
@@ -35,6 +33,7 @@ function FairValue () {
     return (
         <Grid
             container
+            sx={{ flexDirection: 'column' }}
             className='fair-value-container'
         >
             <Grid
@@ -49,24 +48,39 @@ function FairValue () {
                 <Grid
                     className='fair-value-price'
                 >
-                    <Typography variant='h5'>${fairValue}</Typography>
+                    <Typography variant='h5'>${fairValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</Typography>
                 </Grid>
-
-                {/* <Typography variant='h5'>{'Current Value'}</Typography>
-                <Typography variant='h5'>${currentPrice}</Typography> */}
-                <ValuationMeter
-                    currentValue={currentPrice}
-                    fairValue={fairValue}
-                />
+                <ValuationMeter/>
             </Grid>
             <Grid
-                className='fair-value-enterprise-item'
+                className='fair-value-item'
             >
-                <h2 className='fairValueItem'>{'Fair Enterprise Value'}</h2>
-                <h2 className='fairValueText'>{fairValueEnterprise}</h2>
-                <h2 className='fairValueItem'>{'Enterprise Value'}</h2>
-                <h2 className='fairValueText'>${enterpriseValue}</h2>
-                <ValuationMeter currentValue={enterpriseValue} fairValue={fairValueEnterprise}/>
+                <Grid
+                    item
+                    className='fair-value-item'
+                >
+                    <Grid
+                        className='fair-value-label'
+                    >
+                        <Typography variant='h6'>{'Fair Value'}</Typography>
+                    </Grid>
+                    <Grid
+                        className='fair-value-price'
+                    >
+                        <Typography variant='h5'>${fairEnterpriseValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</Typography>
+                    </Grid>
+                    <ValuationMeter/>
+                    <Grid
+                        className='fair-value-label'
+                    >
+                        <Typography variant='h6'>{'Enterprise Value'}</Typography>
+                    </Grid>
+                    <Grid
+                        className='fair-value-price'
+                    >
+                        <Typography variant='h5'>${enterpriseValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</Typography>
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid>
     );

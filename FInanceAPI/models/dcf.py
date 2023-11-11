@@ -1,5 +1,6 @@
 import numpy as np
 import yfinance as yf
+from flask import jsonify
 
 ''' 
     ocf: operating cash flow 
@@ -49,7 +50,9 @@ class DCF:
         discTermVal = termVal / ((1 + self.dr) ** self.n)
         value = (sumOfDcf + discTermVal + self.csms) / self.tso
 
-        return [str(round(self.closing_price,3 )), str(round(value, 3))]
+        payload = {'value': str(round(value, 3))}
+        response = jsonify(payload)
+        return response
     
     def get(growth_rate, dr, n, symbol=None):
 

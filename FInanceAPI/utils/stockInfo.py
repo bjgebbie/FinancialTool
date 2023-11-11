@@ -1,5 +1,6 @@
 import yfinance as yf
 from utils.sp500 import getSp500Companies
+from flask import jsonify
 
 class StockInfo:
     def get(request):
@@ -27,4 +28,12 @@ class StockInfo:
         closing_dict = hist.to_dict()['Close']
         closing_price = next(iter(closing_dict.values()))
 
-        return [round(closing_price, 4), diluted_eps, eps, round(de_ratio, 4)]
+        payload = {
+                    'currentValue': round(closing_price, 4), 
+                    'dilutedEps': diluted_eps,
+                    'eps': eps, 
+                    'de': round(de_ratio, 4)
+                  }
+        response = jsonify(payload)
+
+        return (response)

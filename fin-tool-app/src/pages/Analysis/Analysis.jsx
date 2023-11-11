@@ -1,12 +1,12 @@
 import { Grid } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import FairValue from '../../components/FairValue/FairValue';
 import GrowthRateTable from '../../components/GrowthRateTable/GrowthRateTable';
 import StockInfo from '../../components/StockInfo/StockInfo';
 import TextInput from '../../components/TextInput/TextInput';
-import { setSymbol, setDiscountRate, setGrowthRate, setYears } from '../../store/inputs';
+import { setSymbol, setDiscountRate, setGrowthRate, setYears } from '../../features/inputs';
 
 import './analysis.css';
 
@@ -33,6 +33,9 @@ function Analysis () {
         return event.target.select();
     }
 
+    useEffect(() => {
+        console.log(growthRate);
+    }, [growthRate]);
     return (
         <Grid
             container

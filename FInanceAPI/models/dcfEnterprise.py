@@ -2,6 +2,7 @@ from utils.enterpriseValue import get_enterprise_value
 from utils.sp500 import getSp500Companies
 import yfinance as yf
 import numpy as np
+from flask import jsonify
 
 class DCFEnterprise:
     def __init__(self, cash_flow, balance_sheet, dr, growth_rate, n, tso, market_cap):
@@ -33,7 +34,13 @@ class DCFEnterprise:
         value = (sumOfDcf + discTermVal)
         e_value = get_enterprise_value(self.market_cap, self.balance_sheet, self.csms)
         
-        return [str(round(value, 3)), str(round(e_value, 3))]
+        payload = {
+                    'fairEnterpriseValue': str(round(value, 3)),
+                    'enterpriseValue': str(round(e_value, 3))
+                  }
+        response = jsonify(payload)
+
+        return response
     
     def get(request):
         symbol = request.args.get('symbol')
