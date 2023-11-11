@@ -37,7 +37,7 @@ function GrowthRateTable () {
             <Box
                 className='growth-rate-title-box'
             >
-                {'Growth Rate'}
+                {'Growth Rates'}
             </Box>
             <Box
                 className='growth-rate-table-box'
