@@ -51,16 +51,6 @@
 .fairValueText {
   color: rgb(13, 202, 240);
 }
-.inputsStyle {
-  border: 3px solid rgb(13, 202, 240);
-  color: rgb(13, 202, 240);
-  height: 36px;
-  width: 86px;
-  border-radius: 10px;
-  justify-content: right;
-  float: right;
-  text-align: center;
-}
 .fairValueItem {
   color: rgb(255, 255, 255);
   background-color: rgb(13, 202, 240);

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
+import { useSelector } from 'react-redux';
+
 import getGrowthRate from '../../myFinanceAPI/getGrowthRate';
 
-function GrowthRateTable (props) {
-    const { symbol } = props;
+function GrowthRateTable () {
+    const { symbol } = useSelector((state) => state.inputs);
     const [revenueGR, setRevenueGR] = useState('0.00');
     const [epsDGR, setEpsD] = useState('0.00');
     const [equityGR, setEquityGR] = useState('0.00');

@@ -1,10 +1,12 @@
+import { Grid } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-import Container from 'react-bootstrap/Container';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { useSelector } from 'react-redux';
+
 import getStockInfo from '../../myFinanceAPI/getStockInfo';
 
-function StockInfo (props) {
-    const { symbol } = props;
+function StockInfo () {
+    const { symbol } = useSelector((state) => state.inputs);
     const [currentPrice, setCurrentPrice] = useState('0.000');
     const [dilutedEps, setDilutedEps] = useState('0.000');
     const [eps, setEps] = useState('0.000');
@@ -26,14 +28,14 @@ function StockInfo (props) {
     );
 
     return (
-        <Container>
+        <Grid>
             <ListGroup>
                 <ListGroup.Item>Diluted EPS: {dilutedEps}</ListGroup.Item>
                 <ListGroup.Item>EPS: {eps}</ListGroup.Item>
                 <ListGroup.Item>Net D/E: {deRatio}</ListGroup.Item>
                 <ListGroup.Item>P/E: {Math.round((currentPrice * 100 / eps)) / 100}</ListGroup.Item>
             </ListGroup>
-        </Container>
+        </Grid>
     );
 }
 
