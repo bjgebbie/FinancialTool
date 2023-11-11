@@ -29,9 +29,10 @@ class DCFEnterprise:
             sumOfDcf = dcf + sumOfDcf
         termVal = self.fcf * self.p2fcf
         discTermVal = termVal / ((1 + self.dr) ** self.n)
-        value = (sumOfDcf + discTermVal) / self.tso
-    
-        e_value = get_enterprise_value(self.market_cap, self.balance_sheet, self.csms)/self.tso
+
+        value = (sumOfDcf + discTermVal)
+        e_value = get_enterprise_value(self.market_cap, self.balance_sheet, self.csms)
+        
         return [str(round(value, 3)), str(round(e_value, 3))]
     
     def get(request):
