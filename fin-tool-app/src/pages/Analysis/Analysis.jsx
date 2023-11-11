@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -12,77 +12,75 @@ import './analysis.css';
 
 function Analysis () {
     const dispatch = useDispatch();
-    const { symbol, growthRate, discountRate, years } = useSelector((state) => state.inputs);
+    const { growthRate, discountRate, years } = useSelector((state) => state.inputs);
     const [showDetails, setShowDetails] = useState(false);
-    const [inputSymbol, setInputSymbol] = useState(symbol);
+    const [inputSymbol, setInputSymbol] = useState('');
 
     function inputSymbolChange (event) {
         setInputSymbol(event.target.value);
     }
 
     function handleBlur () {
-        dispatch(setSymbol(inputSymbol));
         if (inputSymbol !== '') {
+            dispatch(setSymbol(inputSymbol.toUpperCase()));
             setShowDetails(true);
         } else {
             setShowDetails(false);
         }
     }
 
+    function onFocus (event) {
+        return event.target.select();
+    }
+
     return (
-        <Grid>
-            <Grid>
-                {/* {showDetails &&
-                <Top20Table
-                    growthRate={growthRate}
-                    dr={dr}
-                    n={n}
-                />
-                } */}
-            </Grid>
-            <Grid>
+        <Grid
+            container
+        >
+            <Grid
+                sx={{
+                    flexDirection: 'column'
+                }}
+                className='analysis-grid'
+            >
                 <input
-                    className='symbolInput'
+                    className='symbol-input'
                     placeholder='Symbol'
                     type="text"
-                    value={inputSymbol}
+                    value={inputSymbol.toUpperCase()}
                     onChange={inputSymbolChange}
-                    onBlur={handleBlur} />
+                    onBlur={handleBlur}
+                    onFocus={(event) => onFocus(event)}
+                />
 
                 {showDetails &&
-                    <Grid>
-                        <Grid
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'column'
-                            }}
-                        >
-                            <TextInput
-                                label={'Growth Rate: '}
-                                value={growthRate}
-                                storeSetter={setGrowthRate}
-                            />
-
-                            <TextInput
-                                label={'Discount Rate: '}
-                                value={discountRate}
-                                storeSetter={setDiscountRate}
-                            />
-
-                            <TextInput
-                                label={'Years: '}
-                                value={years}
-                                storeSetter={setYears}
-                            />
-
-                        </Grid>
-
-                        <FairValue/>
-                        <StockInfo/>
-                        <GrowthRateTable/>
-                    </Grid>
-                }
+                <Grid>
+                    <TextInput
+                        label={'Growth Rate: '}
+                        value={growthRate}
+                        storeSetter={setGrowthRate}
+                    />
+                    <TextInput
+                        label={'Discount Rate: '}
+                        value={discountRate}
+                        storeSetter={setDiscountRate}
+                    />
+                    <TextInput
+                        label={'Years: '}
+                        value={years}
+                        storeSetter={setYears}
+                    />
+                </Grid>}
+                <StockInfo/>
             </Grid>
+            {showDetails &&
+            <Grid
+                style={{
+                    display: 'flex'
+                }}>
+                <FairValue/>
+                <GrowthRateTable/>
+            </Grid>}
         </Grid>
     );
 }

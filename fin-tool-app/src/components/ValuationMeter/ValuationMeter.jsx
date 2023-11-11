@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import React from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
@@ -8,23 +9,60 @@ function ValuationMeter (props) {
         const remain = 100 - now;
 
         return (
-            <div>
-                <ProgressBar style={{ height: 36 }}>
-                    <ProgressBar variant="info" now={now} key={1} />
-                    <ProgressBar striped variant="success" now={remain} key={2} label={`${Math.round(remain)}%`} />
+            <Box
+                style={{
+                    width: '100%',
+                    height: '36px'
+                }}
+            >
+                <ProgressBar
+                    style={{
+                        height: '100%'
+                    }}
+                >
+                    <ProgressBar
+                        style={{
+                            backgroundColor: '#bababa'
+                        }}
+                        now={now}
+                        key={1}
+                    />
+                    <ProgressBar
+                        striped
+                        style={{
+                            backgroundColor: '#2a8c43'
+                        }}
+                        now={remain}
+                        key={2}
+                        label={`${Math.round(remain)}%`}
+                    />
                 </ProgressBar>
-            </div>
+            </Box>
         );
     } else {
         const now = 100 * fairValue / currentValue;
         const remain = 100 - now;
         return (
-            <div>
-                <ProgressBar>
-                    <ProgressBar variant="info" now={now} key={1} />
-                    <ProgressBar striped variant="danger" now={remain} key={2} label={`${Math.round(remain)}%`} />
+            <Box>
+                <ProgressBar style={{ height: '36px' }}>
+                    <ProgressBar
+                        style={{
+                            backgroundColor: '#bababa'
+                        }}
+                        now={now}
+                        key={1}
+                    />
+                    <ProgressBar
+                        style={{
+                            backgroundColor: '#ba463d'
+                        }}
+                        striped
+                        variant="danger"
+                        now={remain}
+                        key={2}
+                        label={`${Math.round(remain)}%`} />
                 </ProgressBar>
-            </div>
+            </Box>
         );
     }
 }

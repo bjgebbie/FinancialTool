@@ -17,9 +17,17 @@ function Input (props) {
         if (inputValue !== '') { dispatch(storeSetter(inputValue)); }
     }
 
+    function handleFocus (event) {
+        const decmialIndex = inputValue.indexOf('.') + 1;
+        return event.target.setSelectionRange(decmialIndex, inputValue.length);
+    }
+
     return (
-        <Grid>
+        <Grid
+            className='text-input-grid'
+        >
             <Typography
+                className='text-input-label'
                 variant='p'
             >
                 {label}
@@ -30,6 +38,7 @@ function Input (props) {
                 value={inputValue}
                 onChange={onChange}
                 onBlur={handleBlur}
+                onFocus={(event) => handleFocus(event)}
             />
         </Grid>
     );

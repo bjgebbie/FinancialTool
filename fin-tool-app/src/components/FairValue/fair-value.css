@@ -1,0 +1,27 @@
+.fair-value-container {
+    flex-direction: row;
+}
+
+.fair-value-item {
+    display: flex;
+    flex-direction: row;
+    width: 400px;
+    flex-wrap: wrap;
+}
+
+.fair-value-label {
+    display: flex;
+    width: 50%;
+    align-items: flex-end;
+}
+
+.fair-value-price {
+    width: 50%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.fair-value-enterprise-item {
+    width: 400px;
+}

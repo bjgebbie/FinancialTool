@@ -1,10 +1,11 @@
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import getDcfEFairValue from '../../myFinanceAPI/getDcfEFairValue';
 import getDcfFairValue from '../../myFinanceAPI/getDcfFairValue';
 import ValuationMeter from '../ValuationMeter/ValuationMeter';
+import './fair-value.css';
 
 function FairValue () {
     const { symbol, growthRate, discountRate, years } = useSelector((state) => state.inputs);
@@ -32,18 +33,38 @@ function FairValue () {
     }, [symbol, growthRate, discountRate, years]);
 
     return (
-        <Grid className='fairValue'>
-            <Grid>
-                <h2 className='fairValueItem'>Fair Value</h2>
-                <h2 className='fairValueText'>${fairValue}</h2>
-                <h2 className='fairValueItem'>Current Value</h2>
-                <h2 className='fairValueText'> {currentPrice} </h2>
-                <ValuationMeter currentValue={currentPrice} fairValue={fairValue}/>
+        <Grid
+            container
+            className='fair-value-container'
+        >
+            <Grid
+                item
+                className='fair-value-item'
+            >
+                <Grid
+                    className='fair-value-label'
+                >
+                    <Typography variant='h6'>{'Fair Value'}</Typography>
+                </Grid>
+                <Grid
+                    className='fair-value-price'
+                >
+                    <Typography variant='h5'>${fairValue}</Typography>
+                </Grid>
+
+                {/* <Typography variant='h5'>{'Current Value'}</Typography>
+                <Typography variant='h5'>${currentPrice}</Typography> */}
+                <ValuationMeter
+                    currentValue={currentPrice}
+                    fairValue={fairValue}
+                />
             </Grid>
-            <Grid style={{ marginTop: 20 }}>
-                <h2 className='fairValueItem'>Fair Enterprise Value </h2>
+            <Grid
+                className='fair-value-enterprise-item'
+            >
+                <h2 className='fairValueItem'>{'Fair Enterprise Value'}</h2>
                 <h2 className='fairValueText'>{fairValueEnterprise}</h2>
-                <h2 className='fairValueItem'>Enterprise Value</h2>
+                <h2 className='fairValueItem'>{'Enterprise Value'}</h2>
                 <h2 className='fairValueText'>${enterpriseValue}</h2>
                 <ValuationMeter currentValue={enterpriseValue} fairValue={fairValueEnterprise}/>
             </Grid>

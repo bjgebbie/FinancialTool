@@ -1,5 +1,24 @@
 .text-input {
-  height: 36px;
-  width: 50px;
-  text-align: center;
+    height: 36px;
+    width: 50px;
+    text-align: center;
+    border: 0;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+.text-input:focus {
+    outline: 0;
+    background-color: #bababa;
+}
+.text-input-grid {
+    margin: 3px;
+    padding: 3px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border: solid 1px #000;
+}
+
+.text-input-label {
+    padding-right: 18px;
 }
