@@ -1,10 +1,9 @@
 import { Box } from '@mui/material';
 import React from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import { useSelector } from 'react-redux';
 
-function ValuationMeter () {
-    const { currentValue, fairValue } = useSelector((state) => state.values);
+function ValuationMeter (props) {
+    const { currentValue, fairValue } = props;
 
     if (Number(fairValue) >= Number(currentValue)) {
         const now = 100 * currentValue / fairValue;
@@ -14,10 +13,12 @@ function ValuationMeter () {
             <Box
                 style={{
                     width: '100%',
-                    height: '36px'
+                    margin: '3px',
+                    height: '30px'
                 }}
             >
                 <ProgressBar
+
                     style={{
                         height: '100%'
                     }}
@@ -45,7 +46,13 @@ function ValuationMeter () {
         const now = 100 * fairValue / currentValue;
         const remain = 100 - now;
         return (
-            <Box>
+            <Box
+                style={{
+                    width: '100%',
+                    margin: '3px',
+                    height: '30px'
+                }}
+            >
                 <ProgressBar style={{ height: '36px' }}>
                     <ProgressBar
                         style={{
@@ -59,7 +66,6 @@ function ValuationMeter () {
                             backgroundColor: '#ba463d'
                         }}
                         striped
-                        variant="danger"
                         now={remain}
                         key={2}
                         label={`${Math.round(remain)}%`} />

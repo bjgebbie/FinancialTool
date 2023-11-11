@@ -33,9 +33,6 @@ function Analysis () {
         return event.target.select();
     }
 
-    useEffect(() => {
-        console.log(growthRate);
-    }, [growthRate]);
     return (
         <Grid
             container
@@ -57,24 +54,27 @@ function Analysis () {
                 />
 
                 {showDetails &&
-                <Grid>
-                    <TextInput
-                        label={'Growth Rate: '}
-                        value={growthRate}
-                        storeSetter={setGrowthRate}
-                    />
-                    <TextInput
-                        label={'Discount Rate: '}
-                        value={discountRate}
-                        storeSetter={setDiscountRate}
-                    />
-                    <TextInput
-                        label={'Years: '}
-                        value={years}
-                        storeSetter={setYears}
-                    />
-                </Grid>}
-                <StockInfo/>
+                <>
+                    <Grid>
+                        <TextInput
+                            label={'Growth Rate: '}
+                            value={growthRate}
+                            storeSetter={setGrowthRate}
+                        />
+                        <TextInput
+                            label={'Discount Rate: '}
+                            value={discountRate}
+                            storeSetter={setDiscountRate}
+                        />
+                        <TextInput
+                            label={'Years: '}
+                            value={years}
+                            storeSetter={setYears}
+                        />
+                    </Grid>
+                    <StockInfo/>
+                </>
+                }
             </Grid>
             {showDetails &&
             <Grid

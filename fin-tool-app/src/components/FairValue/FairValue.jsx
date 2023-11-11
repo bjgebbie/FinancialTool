@@ -11,7 +11,7 @@ import './fair-value.css';
 function FairValue () {
     const dispatch = useDispatch();
     const { symbol, growthRate, discountRate, years } = useSelector((state) => state.inputs);
-    const { fairValue, fairEnterpriseValue, enterpriseValue } = useSelector((state) => state.values);
+    const { currentValue, fairValue, fairEnterpriseValue, enterpriseValue } = useSelector((state) => state.values);
 
     useEffect(() => {
         getDcfFairValue(symbol, growthRate, discountRate, years).then(
@@ -50,7 +50,10 @@ function FairValue () {
                 >
                     <Typography variant='h5'>${fairValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</Typography>
                 </Grid>
-                <ValuationMeter/>
+                <ValuationMeter
+                    currentValue={currentValue}
+                    fairValue={fairValue}
+                />
             </Grid>
             <Grid
                 className='fair-value-item'
@@ -69,7 +72,10 @@ function FairValue () {
                     >
                         <Typography variant='h5'>${fairEnterpriseValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</Typography>
                     </Grid>
-                    <ValuationMeter/>
+                    <ValuationMeter
+                        currentValue={enterpriseValue}
+                        fairValue={fairEnterpriseValue}
+                    />
                     <Grid
                         className='fair-value-label'
                     >
