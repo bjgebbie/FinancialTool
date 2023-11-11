@@ -1,0 +1,22 @@
+.growth-rate-table-box {
+    display: flex;
+    flex-direction: row;
+    border: solid 1px #000;
+    max-width: 280px;
+    height: fit-content;
+    padding: 0;
+}
+
+.list-text {
+    text-align: right;
+}
+
+.growth-rate-title-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 49px;
+    align-items: center;
+    border: 1px solid #000;
+    border-bottom: 0;
+}

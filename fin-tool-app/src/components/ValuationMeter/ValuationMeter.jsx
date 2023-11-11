@@ -18,7 +18,6 @@ function ValuationMeter (props) {
                 }}
             >
                 <ProgressBar
-
                     style={{
                         height: '100%'
                     }}
@@ -53,7 +52,10 @@ function ValuationMeter (props) {
                     height: '30px'
                 }}
             >
-                <ProgressBar style={{ height: '36px' }}>
+                <ProgressBar
+                    style={{
+                        height: '100%'
+                    }}>
                     <ProgressBar
                         style={{
                             backgroundColor: '#bababa'

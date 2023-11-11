@@ -8,6 +8,16 @@ import getDcfFairValue from '../../myFinanceAPI/getDcfFairValue';
 import ValuationMeter from '../ValuationMeter/ValuationMeter';
 import './fair-value.css';
 
+const formatLongNumber = (value) => {
+    let formattedValue;
+    if (value.length > 16) {
+        formattedValue = `${value.substring(0, value.length - 13)} Billions`;
+        return formattedValue;
+    }
+    formattedValue = `${value.substring(0, value.length - 10)} Millions`;
+    return formattedValue;
+};
+
 function FairValue () {
     const dispatch = useDispatch();
     const { symbol, growthRate, discountRate, years } = useSelector((state) => state.inputs);
@@ -48,7 +58,7 @@ function FairValue () {
                 <Grid
                     className='fair-value-price'
                 >
-                    <Typography variant='h5'>${fairValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</Typography>
+                    <Typography variant='h5'>${fairValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</Typography>
                 </Grid>
                 <ValuationMeter
                     currentValue={currentValue}
@@ -65,12 +75,12 @@ function FairValue () {
                     <Grid
                         className='fair-value-label'
                     >
-                        <Typography variant='h6'>{'Fair Value'}</Typography>
+                        <Typography variant='h6'>{'Fair Enterprise Value'}</Typography>
                     </Grid>
                     <Grid
                         className='fair-value-price'
                     >
-                        <Typography variant='h5'>${fairEnterpriseValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</Typography>
+                        <Typography variant='h6'>${formatLongNumber(fairEnterpriseValue).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</Typography>
                     </Grid>
                     <ValuationMeter
                         currentValue={enterpriseValue}
@@ -84,7 +94,7 @@ function FairValue () {
                     <Grid
                         className='fair-value-price'
                     >
-                        <Typography variant='h5'>${enterpriseValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</Typography>
+                        <Typography variant='h6'>${formatLongNumber(enterpriseValue).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</Typography>
                     </Grid>
                 </Grid>
             </Grid>

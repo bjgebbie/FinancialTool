@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import FairValue from '../../components/FairValue/FairValue';
@@ -35,6 +35,7 @@ function Analysis () {
 
     return (
         <Grid
+            className='analysis-grid-container'
             container
         >
             <Grid
@@ -55,19 +56,22 @@ function Analysis () {
 
                 {showDetails &&
                 <>
-                    <Grid>
+                    <Grid
+                        item
+                        className='text-inputs-grid-item'
+                    >
                         <TextInput
-                            label={'Growth Rate: '}
+                            label={'Growth Rate'}
                             value={growthRate}
                             storeSetter={setGrowthRate}
                         />
                         <TextInput
-                            label={'Discount Rate: '}
+                            label={'Discount Rate'}
                             value={discountRate}
                             storeSetter={setDiscountRate}
                         />
                         <TextInput
-                            label={'Years: '}
+                            label={'Years'}
                             value={years}
                             storeSetter={setYears}
                         />

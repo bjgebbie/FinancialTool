@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { setGrowthRate } from '../../features/inputs';
 import getGrowthRate from '../../myFinanceAPI/getGrowthRate';
+import './growth-rate-table.css';
 
 function GrowthRateTable () {
     const dispatch = useDispatch();
@@ -30,55 +31,75 @@ function GrowthRateTable () {
         <Box
             style={{
                 display: 'flex',
-                flexDirection: 'row',
-                border: 'solid 1px #000',
-                maxWidth: '280px'
-            }}>
-            <List>
-                <ListItem style={{
-                    borderColor: '#000'
-                }}
-                divider>
-                    <ListItemText primary='FCF' />
-                </ListItem>
-                <ListItem divider>
-                    <ListItemText primary='Revenue' />
-                </ListItem>
-                <ListItem divider>
-                    <ListItemText primary='Diluted EPS' />
-                </ListItem>
-                <ListItem divider>
-                    <ListItemText primary='Equity' />
-                </ListItem>
-            </List>
-            <List>
-                <ListItemButton
-                    divider
-                    onClick={() => dispatch(setGrowthRate(fcfGR))}
+                flexDirection: 'column'
+            }}
+        >
+            <Box
+                className='growth-rate-title-box'
+            >
+                {'Growth Rate'}
+            </Box>
+            <Box
+                className='growth-rate-table-box'
+            >
+                <List
+                    sx={{
+                        padding: '0'
+                    }}
                 >
-                    <ListItemText primary={fcfGR}/>
-                </ListItemButton>
-                <ListItemButton
-                    divider
-                    onClick={() => dispatch(setGrowthRate(revenueGR))}
+                    <ListItem
+                        divider>
+                        <ListItemText
+                            className='list-text'
+                            primary='FCF' />
+                    </ListItem>
+                    <ListItem divider>
+                        <ListItemText
+                            className='list-text'
+                            primary='Revenue' />
+                    </ListItem>
+                    <ListItem
+                        className='list-text'
+                        divider>
+                        <ListItemText primary='Diluted EPS' />
+                    </ListItem>
+                    <ListItem>
+                        <ListItemText
+                            className='list-text'
+                            primary='Equity' />
+                    </ListItem>
+                </List>
+                <List
+                    sx={{
+                        padding: '0'
+                    }}
                 >
-                    <ListItemText primary={revenueGR} />
-                </ListItemButton>
-                <ListItemButton
-                    divider
-                    onClick={() => dispatch(setGrowthRate(epsDGR))}
-                >
-                    <ListItemText primary={epsDGR} />
-                </ListItemButton>
-                <ListItemButton
-                    divider
-                    onClick={() => dispatch(setGrowthRate(equityGR))}
-                >
-                    <ListItemText primary={equityGR} />
-                </ListItemButton>
-            </List>
+                    <ListItemButton
+                        divider
+                        onClick={() => dispatch(setGrowthRate(fcfGR))}
+                    >
+                        <ListItemText primary={fcfGR}/>
+                    </ListItemButton>
+                    <ListItemButton
+                        divider
+                        onClick={() => dispatch(setGrowthRate(revenueGR))}
+                    >
+                        <ListItemText primary={revenueGR} />
+                    </ListItemButton>
+                    <ListItemButton
+                        divider
+                        onClick={() => dispatch(setGrowthRate(epsDGR))}
+                    >
+                        <ListItemText primary={epsDGR} />
+                    </ListItemButton>
+                    <ListItemButton
+                        onClick={() => dispatch(setGrowthRate(equityGR))}
+                    >
+                        <ListItemText primary={equityGR} />
+                    </ListItemButton>
+                </List>
+            </Box>
         </Box>
-
     );
 }
 
