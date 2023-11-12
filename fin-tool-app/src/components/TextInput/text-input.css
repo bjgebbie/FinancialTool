@@ -11,8 +11,7 @@
     background-color: #bababa;
 }
 .text-input-grid {
-    margin: 3px;
-    padding: 3px;
+    margin-bottom: 3px;
     display: flex;
     justify-content: flex-end;
     align-items: center;

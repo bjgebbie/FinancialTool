@@ -1,37 +1,17 @@
 import { Grid } from '@mui/material';
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import FairValue from '../../components/FairValue/FairValue';
 import GrowthRateTable from '../../components/GrowthRateTable/GrowthRateTable';
 import StockInfo from '../../components/StockInfo/StockInfo';
+import SymbolInput from '../../components/SymbolInput/SymbolInput';
 import TextInput from '../../components/TextInput/TextInput';
-import { setSymbol, setDiscountRate, setGrowthRate, setYears } from '../../features/inputs';
-
+import { setDiscountRate, setGrowthRate, setYears } from '../../features/inputs';
 import './analysis.css';
 
 function Analysis () {
-    const dispatch = useDispatch();
     const { growthRate, discountRate, years } = useSelector((state) => state.inputs);
-    const [showDetails, setShowDetails] = useState(false);
-    const [inputSymbol, setInputSymbol] = useState('');
-
-    function inputSymbolChange (event) {
-        setInputSymbol(event.target.value);
-    }
-
-    function handleBlur () {
-        if (inputSymbol !== '') {
-            dispatch(setSymbol(inputSymbol.toUpperCase()));
-            setShowDetails(true);
-        } else {
-            setShowDetails(false);
-        }
-    }
-
-    function onFocus (event) {
-        return event.target.select();
-    }
 
     return (
         <Grid
@@ -44,50 +24,38 @@ function Analysis () {
                 }}
                 className='analysis-grid'
             >
-                <input
-                    className='symbol-input'
-                    placeholder='Symbol'
-                    type="text"
-                    value={inputSymbol.toUpperCase()}
-                    onChange={inputSymbolChange}
-                    onBlur={handleBlur}
-                    onFocus={(event) => onFocus(event)}
-                />
+                <SymbolInput/>
+                <Grid
+                    item
+                    className='text-inputs-grid-item'
+                >
+                    <TextInput
+                        label={'Growth Rate'}
+                        value={growthRate}
+                        storeSetter={setGrowthRate}
+                    />
+                    <TextInput
+                        label={'Discount Rate'}
+                        value={discountRate}
+                        storeSetter={setDiscountRate}
+                    />
+                    <TextInput
+                        label={'Years'}
+                        value={years}
+                        storeSetter={setYears}
+                    />
+                </Grid>
+                <StockInfo/>
 
-                {showDetails &&
-                <>
-                    <Grid
-                        item
-                        className='text-inputs-grid-item'
-                    >
-                        <TextInput
-                            label={'Growth Rate'}
-                            value={growthRate}
-                            storeSetter={setGrowthRate}
-                        />
-                        <TextInput
-                            label={'Discount Rate'}
-                            value={discountRate}
-                            storeSetter={setDiscountRate}
-                        />
-                        <TextInput
-                            label={'Years'}
-                            value={years}
-                            storeSetter={setYears}
-                        />
-                    </Grid>
-                    <StockInfo/>
-                </>
-                }
             </Grid>
-            {showDetails &&
-            <Grid
-                style={{
-                    display: 'flex'
-                }}>
-                <FairValue/>
-                <GrowthRateTable/>
-            </Grid>}
+            {
+                <Grid
+                    style={{
+                        display: 'flex'
+                    }}>
+                    <FairValue/>
+                    <GrowthRateTable/>
+                </Grid>}
         </Grid>
     );
 }

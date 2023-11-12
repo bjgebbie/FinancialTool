@@ -1,34 +1,9 @@
-.symbol-input {
-    margin: 3px;
-    margin-bottom: 0;
-    padding: 3px;
-    display: flex;
-    height: 43.81px;
-    justify-content: center;
-    text-align: center;
-    border: solid 1px #000;
-}
-
-.symbol-input:focus {
-  outline: 0;
-  background-color: #bababa;
-}
-
-.symbol-input::placeholder {
-  color: #bababa;
-}
-
 .analysis-grid {
   display: flex;
   width: 190px;
-  padding: 2px;
   justify-content: right;
 }
 .analysis-grid-container {
   padding: 20px;
   justify-content: center;
-}
-
-.text-inputs-grid-item {
-  padding: 20px 0
 }
