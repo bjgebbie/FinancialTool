@@ -1,7 +1,6 @@
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import React from 'react';
 
-import SymbolInput from '../../components/SymbolInput/SymbolInput';
 import './home.css';
 
 function Home () {
@@ -10,7 +9,11 @@ function Home () {
             container
             className='home-grid-container'
         >
-            <SymbolInput/>
+            <Typography
+                variant='h3'
+            >
+                {'Welcome!'}
+            </Typography>
         </Grid>
     );
 }

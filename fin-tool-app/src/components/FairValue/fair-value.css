@@ -14,12 +14,28 @@
 .fair-value-label {
     display: flex;
     width: 50%;
-    align-items: flex-end;
+    align-items: center;
+    padding: 0 3px;
 }
 
 .fair-value-price {
     width: 50%;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: flex-end;
+    padding: 0 3px;
+}
+
+.progress-bar-skeleton {
+    width: 100%;
+    border-radius: 6px;
+    margin: 3px 3px;
+
+}
+
+.value-skeleton {
+    transform: scale(1.0, 2.0);
+    border-radius: 6px;
+    width: 160px;
+    margin: 3px 0;
 }

@@ -1,5 +1,5 @@
-import { Grid, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
+import { Grid, Typography, Skeleton, Box } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setFairValue, setFairEnterpriseValue, setEnterpriseValue } from '../../features/values';
@@ -22,22 +22,28 @@ function FairValue () {
     const dispatch = useDispatch();
     const { symbol, growthRate, discountRate, years } = useSelector((state) => state.inputs);
     const { currentValue, fairValue, fairEnterpriseValue, enterpriseValue } = useSelector((state) => state.values);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        getDcfFairValue(symbol, growthRate, discountRate, years).then(
-            (response) => {
-                const fairValue = response.data.value;
-                dispatch(setFairValue(fairValue));
-            }
-        );
-        getDcfEFairValue(symbol, growthRate, discountRate, years).then(
-            (response) => {
-                const fairEnterpriseValue = response.data.fairEnterpriseValue;
-                const enterpriseValue = response.data.enterpriseValue;
-                dispatch(setFairEnterpriseValue(fairEnterpriseValue));
-                dispatch(setEnterpriseValue(enterpriseValue));
-            }
-        );
+        async function fetchFairValues () {
+            setLoading(true);
+            await getDcfFairValue(symbol, growthRate, discountRate, years).then(
+                (response) => {
+                    const fairValue = response.data.value;
+                    dispatch(setFairValue(fairValue));
+                }
+            );
+            await getDcfEFairValue(symbol, growthRate, discountRate, years).then(
+                (response) => {
+                    const fairEnterpriseValue = response.data.fairEnterpriseValue;
+                    const enterpriseValue = response.data.enterpriseValue;
+                    dispatch(setFairEnterpriseValue(fairEnterpriseValue));
+                    dispatch(setEnterpriseValue(enterpriseValue));
+                }
+            );
+            setLoading(false);
+        }
+        fetchFairValues();
     }, [symbol, growthRate, discountRate, years]);
 
     return (
@@ -58,12 +64,26 @@ function FairValue () {
                 <Grid
                     className='fair-value-price'
                 >
-                    <Typography variant='h5'>${fairValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</Typography>
+                    {loading
+                        ? <Skeleton
+                            height={32}
+                            sx={{ transform: 'scaleY(1.0)' }}
+                            className='value-skeleton'
+                        />
+                        : <Typography
+                            variant='h5'>
+                                ${fairValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                        </Typography>}
                 </Grid>
-                <ValuationMeter
-                    currentValue={currentValue}
-                    fairValue={fairValue}
-                />
+                {loading
+                    ? <Skeleton
+                        variant='rectangle'
+                        height={30}
+                        className='progress-bar-skeleton' />
+                    : <ValuationMeter
+                        currentValue={currentValue}
+                        fairValue={fairValue}
+                    />}
             </Grid>
             <Grid
                 className='fair-value-item'
@@ -80,12 +100,26 @@ function FairValue () {
                     <Grid
                         className='fair-value-price'
                     >
-                        <Typography variant='h6'>${formatLongNumber(fairEnterpriseValue).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</Typography>
+                        {loading
+                            ? <Skeleton
+                                height={32}
+                                sx={{ transform: 'scaleY(1.0)' }}
+                                className='value-skeleton'
+                            />
+                            : <Typography
+                                variant='h5'>
+                                    ${formatLongNumber(fairEnterpriseValue).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                            </Typography>}
                     </Grid>
-                    <ValuationMeter
-                        currentValue={enterpriseValue}
-                        fairValue={fairEnterpriseValue}
-                    />
+                    {loading
+                        ? <Skeleton
+                            variant='rectangle'
+                            height={30}
+                            className='progress-bar-skeleton' />
+                        : <ValuationMeter
+                            currentValue={enterpriseValue}
+                            fairValue={fairEnterpriseValue}
+                        />}
                     <Grid
                         className='fair-value-label'
                     >
@@ -94,7 +128,17 @@ function FairValue () {
                     <Grid
                         className='fair-value-price'
                     >
-                        <Typography variant='h6'>${formatLongNumber(enterpriseValue).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</Typography>
+                        {loading
+                            ? <Skeleton
+                                height={32}
+                                sx={{ transform: 'scaleY(1.0)' }}
+                                className='value-skeleton'
+                            />
+                            : <Typography
+                                variant='h6'>
+                                ${formatLongNumber(enterpriseValue).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                            </Typography>
+                        }
                     </Grid>
                 </Grid>
             </Grid>

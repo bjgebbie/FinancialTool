@@ -5,13 +5,12 @@ import { useSelector } from 'react-redux';
 import FairValue from '../../components/FairValue/FairValue';
 import GrowthRateTable from '../../components/GrowthRateTable/GrowthRateTable';
 import StockInfo from '../../components/StockInfo/StockInfo';
-import SymbolInput from '../../components/SymbolInput/SymbolInput';
 import TextInput from '../../components/TextInput/TextInput';
 import { setDiscountRate, setGrowthRate, setYears } from '../../features/inputs';
 import './analysis.css';
 
 function Analysis () {
-    const { growthRate, discountRate, years } = useSelector((state) => state.inputs);
+    const { symbol, growthRate, discountRate, years } = useSelector((state) => state.inputs);
 
     return (
         <Grid
@@ -24,7 +23,6 @@ function Analysis () {
                 }}
                 className='analysis-grid'
             >
-                <SymbolInput/>
                 <Grid
                     item
                     className='text-inputs-grid-item'
@@ -53,7 +51,7 @@ function Analysis () {
                     style={{
                         display: 'flex'
                     }}>
-                    <FairValue/>
+                    {symbol !== '' && <FairValue/>}
                     <GrowthRateTable/>
                 </Grid>}
         </Grid>

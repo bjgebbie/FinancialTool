@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -26,6 +26,10 @@ function SymbolInput () {
     function onFocus (event) {
         return event.target.select();
     }
+
+    useEffect(() => {
+        setInputSymbol(symbol);
+    }, [symbol]);
 
     return (
         <Grid>

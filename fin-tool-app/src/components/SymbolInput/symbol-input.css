@@ -1,17 +1,20 @@
 .symbol-input {
-    width: 190px;
-    margin-bottom: 20px;
+    width: 120px;
+    margin: 10px;
     display: flex;
     height: 43.81px;
     justify-content: center;
     text-align: center;
-    border: solid 1px #000;
+    border: 0;
+    border-radius: 4px;
 }
 
 .symbol-input:focus {
-  outline: 0;
-  background-color: #bababa;
-}
+    outline: 0;
+    border-top: inset 3px #737373;
+    border-left: inset 3px #737373;
+
+}   
 
 .symbol-input::placeholder {
   color: #bababa;
