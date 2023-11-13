@@ -1,0 +1,9 @@
+.stock-info-box {
+    display: flex;
+    text-align: right;
+    width: 100%; 
+    background-color: #FFFFFF;
+    margin-top: 20px;
+    border-radius: 6px;
+    border: solid 1px #E0E4E7;
+}

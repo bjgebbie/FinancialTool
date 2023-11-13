@@ -1,9 +1,11 @@
-.analysis-grid {
+.analysis-grid-item {
   display: flex;
-  width: 190px;
+  width: 260;
   justify-content: right;
 }
 .analysis-grid-container {
   padding: 20px;
   justify-content: center;
+  height: 100vh;
+  background-color: #f1f1f1;
 }

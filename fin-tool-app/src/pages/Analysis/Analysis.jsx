@@ -18,10 +18,11 @@ function Analysis () {
             container
         >
             <Grid
+                item
                 sx={{
                     flexDirection: 'column'
                 }}
-                className='analysis-grid'
+                className='analysis-grid-item'
             >
                 <Grid
                     item

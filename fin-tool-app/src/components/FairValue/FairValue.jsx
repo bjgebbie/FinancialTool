@@ -1,4 +1,4 @@
-import { Grid, Typography, Skeleton, Box } from '@mui/material';
+import { Grid, Typography, Skeleton } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -49,7 +49,9 @@ function FairValue () {
     return (
         <Grid
             container
-            sx={{ flexDirection: 'column' }}
+            sx={{
+                flexDirection: 'column'
+            }}
             className='fair-value-container'
         >
             <Grid
@@ -107,7 +109,7 @@ function FairValue () {
                                 className='value-skeleton'
                             />
                             : <Typography
-                                variant='h5'>
+                                variant='h6'>
                                     ${formatLongNumber(fairEnterpriseValue).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                             </Typography>}
                     </Grid>

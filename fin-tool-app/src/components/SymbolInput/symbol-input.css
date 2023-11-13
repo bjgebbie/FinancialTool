@@ -6,14 +6,16 @@
     justify-content: center;
     text-align: center;
     border: 0;
-    border-radius: 4px;
+    border-radius: 6px;
+    border-color: #737373;
 }
 
 .symbol-input:focus {
     outline: 0;
-    border-top: inset 3px #737373;
-    border-left: inset 3px #737373;
-
+    padding-top: 3px;
+    padding-left: 3px;
+    border-top: inset 3px;
+    border-left: inset 3px;
 }   
 
 .symbol-input::placeholder {

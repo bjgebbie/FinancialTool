@@ -1,10 +1,10 @@
-import { Grid } from '@mui/material';
+import { Box, ListItem, List, ListItemText } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-import ListGroup from 'react-bootstrap/ListGroup';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { setCurrentValue } from '../../features/values';
 import getStockInfo from '../../myFinanceAPI/getStockInfo';
+import './stock-info.css';
 
 function StockInfo () {
     const dispatch = useDispatch();
@@ -27,15 +27,44 @@ function StockInfo () {
     }, [symbol, currentValue]);
 
     return (
-        <Grid>
-            <ListGroup>
-                <ListGroup.Item>Current Price: {currentValue}</ListGroup.Item>
-                <ListGroup.Item>Diluted EPS: {dilutedEps}</ListGroup.Item>
-                <ListGroup.Item>EPS: {eps}</ListGroup.Item>
-                <ListGroup.Item>Net D/E: {deRatio}</ListGroup.Item>
-                <ListGroup.Item>P/E: {Math.round((parseFloat(currentValue) * 100 / eps)) / 100}</ListGroup.Item>
-            </ListGroup>
-        </Grid>
+        <Box
+            className='stock-info-box'
+        >
+            <List
+                sx={{
+                    padding: 0
+                }}
+            >
+                <ListItem divider>
+                    <ListItemText className='list-text' primary={'Current Price'}/>
+                </ListItem>
+                <ListItem divider>
+                    <ListItemText className='list-text' primary={'Diluted Eps'}/>
+                </ListItem>
+                <ListItem divider>
+                    <ListItemText className='list-text' primary={'Net D/E'}/>
+                </ListItem>
+                <ListItem divider>
+                    <ListItemText className='list-text' primary={'P/E'}/>
+                </ListItem>
+            </List>
+            <List
+                sx={{ padding: 0 }}
+            >
+                <ListItem divider>
+                    <ListItemText className='list-text' primary={`$${currentValue}`}/>
+                </ListItem>
+                <ListItem divider>
+                    <ListItemText className='list-text' primary={`${dilutedEps}`}/>
+                </ListItem>
+                <ListItem divider>
+                    <ListItemText className='list-text' primary={`${deRatio}`}/>
+                </ListItem>
+                <ListItem divider>
+                    <ListItemText className='list-text' primary={`${Math.round((parseFloat(currentValue) * 100 / eps)) / 100}`}/>
+                </ListItem>
+            </List>
+        </Box>
     );
 }
 

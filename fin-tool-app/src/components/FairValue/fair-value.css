@@ -1,8 +1,13 @@
 .fair-value-container {
+    height: 200px;
+    padding: 15px;
     margin: 0 20px;
     display: flex;
     flex-direction: column;
-    max-width: 400px;
+    max-width: 440px;
+    border: solid 1px #E0E4E7;
+    background-color: #FFFFFF;
+    border-radius: 6px;
 }
 
 .fair-value-item {
